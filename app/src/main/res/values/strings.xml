@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Найти курьера</string>
+    <string name="title_activity_delivery">DeliveryActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="registration">Регистрация</string>
+    <string name="enter">Войти</string>
+    <string name="pwd">Пароль</string>
+    <string name="login">Логин</string>
+    <string name="enter_client">Войти как клиент</string>
+    <string name="enter_deliver">Войти как курьер</string>
+    <string name="enter_manager">Войти как менеджер</string>
+    <string name="search">Поиск</string>
+    <string name="exit">Выход</string>
+    <string name="delivered">Доставленные</string>
+    <string name="my_orders">Текущие заказы</string>
+    <string name="my_review">Мои отзывы</string>
+    <string name="discount">Акции/скидки</string>
+    <string name="auth">Авторизация</string>
+</resources>
