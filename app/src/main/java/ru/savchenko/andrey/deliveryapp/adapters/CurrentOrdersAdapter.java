@@ -6,8 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.RatingBar;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import org.joda.time.DateTime;
 
 import java.util.List;
 
@@ -117,19 +119,33 @@ public class CurrentOrdersAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     private class DeliveredHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView tvOrderBody;
-        RatingBar ratingOrder;
+        TextView tvTitle;
+        TextView tvCurierName;
+        TextView tvDate;
+        ImageView ivCompanyLogo;
+        Button btnRating;
+
 
 
         DeliveredHolder(View itemView) {
             super(itemView);
             tvOrderBody = itemView.findViewById(R.id.tvOrderBody);
-            ratingOrder = itemView.findViewById(R.id.ratingOrder);
+            tvTitle = itemView.findViewById(R.id.tvTitle);
+            tvCurierName = itemView.findViewById(R.id.tvCurierName);
+            tvDate = itemView.findViewById(R.id.tvDate);
+            btnRating = itemView.findViewById(R.id.btnRating);
+            ivCompanyLogo = itemView.findViewById(R.id.ivCompanyLogo);
+
             itemView.setOnClickListener(this);
         }
 
         void bind(Order order){
             tvOrderBody.setText(order.getBody());
-            ratingOrder.setRating(order.getRating());
+            tvTitle.setText(order.getTitle());
+            tvCurierName.setText("Имя курьера");
+            DateTime date = order.getCreated();
+            tvDate.setText(date.getDayOfMonth() + "-" +  date.getMonthOfYear() + "-" + date.getYear() + " " + date.getHourOfDay());
+            btnRating.setOnClickListener(view -> Log.i(TAG, "bind: " + getAdapterPosition()));
         }
 
         @Override
