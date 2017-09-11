@@ -8,6 +8,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+
+import com.squareup.picasso.Picasso;
 
 import org.joda.time.DateTime;
 
@@ -20,6 +23,7 @@ import ru.savchenko.andrey.deliveryapp.R;
 import ru.savchenko.andrey.deliveryapp.adapters.CurrentOrdersAdapter;
 import ru.savchenko.andrey.deliveryapp.base.BaseFragment;
 import ru.savchenko.andrey.deliveryapp.entities.Order;
+import ru.savchenko.andrey.deliveryapp.interfaces.OnCircleSet;
 import ru.savchenko.andrey.deliveryapp.interfaces.OnItemClickListener;
 
 import static android.content.ContentValues.TAG;
@@ -29,7 +33,7 @@ import static ru.savchenko.andrey.deliveryapp.storage.Const.DELIVERED;
  * Created by Andrey on 09.09.2017.
  */
 
-public class DeliveredFragment extends BaseFragment implements OnItemClickListener{
+public class DeliveredFragment extends BaseFragment implements OnItemClickListener, OnCircleSet{
     @BindView(R.id.rvCurrentOrders)
     RecyclerView rvCurrentOrders;
 
@@ -66,7 +70,7 @@ public class DeliveredFragment extends BaseFragment implements OnItemClickListen
             order.setStatus(DELIVERED);
             order.setRating((int) (Math.random()*5));
         }
-
+        adapter.setOnCircleSet(this);
         adapter.setData(orders);
         rvCurrentOrders.setAdapter(adapter);
     }
@@ -74,5 +78,11 @@ public class DeliveredFragment extends BaseFragment implements OnItemClickListen
     @Override
     public void onclick(int position) {
         Log.i(TAG, "onclick: " + position);
+    }
+
+    @Override
+    public void onCircleSet(String url, ImageView imageView) {
+        Log.i(TAG, "onCircleSet: ");
+        Picasso.with(getActivity()).load(url).into(imageView);
     }
 }
