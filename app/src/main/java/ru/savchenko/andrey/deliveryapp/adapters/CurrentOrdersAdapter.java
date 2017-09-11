@@ -15,6 +15,7 @@ import java.util.List;
 
 import ru.savchenko.andrey.deliveryapp.R;
 import ru.savchenko.andrey.deliveryapp.entities.Order;
+import ru.savchenko.andrey.deliveryapp.interfaces.OnCircleSet;
 import ru.savchenko.andrey.deliveryapp.interfaces.OnItemClickListener;
 import ru.savchenko.andrey.deliveryapp.interfaces.OnSetTime;
 import ru.savchenko.andrey.deliveryapp.storage.Const;
@@ -31,7 +32,11 @@ public class CurrentOrdersAdapter extends RecyclerView.Adapter<RecyclerView.View
     private OnItemClickListener clickListener;
     private int DELIVERED_STATUS = 0;
     private int NOT_DELIVERED_STATUS = 1;
+    private OnCircleSet onCircleSet;
 
+    public void setOnCircleSet(OnCircleSet onCircleSet) {
+        this.onCircleSet = onCircleSet;
+    }
 
     public CurrentOrdersAdapter(OnItemClickListener clickListener){
         this.clickListener = clickListener;
@@ -146,6 +151,7 @@ public class CurrentOrdersAdapter extends RecyclerView.Adapter<RecyclerView.View
             DateTime date = order.getCreated();
             tvDate.setText(date.getDayOfMonth() + "-" +  date.getMonthOfYear() + "-" + date.getYear() + " " + date.getHourOfDay());
             btnRating.setOnClickListener(view -> Log.i(TAG, "bind: " + getAdapterPosition()));
+            onCircleSet.onCircleSet("http://www.footballfreestyle.ru/wp-content/uploads/2014/11/test.jpg", ivCompanyLogo);
         }
 
         @Override
