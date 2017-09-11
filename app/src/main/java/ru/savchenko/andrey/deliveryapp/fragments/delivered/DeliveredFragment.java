@@ -51,16 +51,16 @@ public class DeliveredFragment extends BaseFragment implements OnItemClickListen
         rvCurrentOrders.setLayoutManager(new LinearLayoutManager(getActivity()));
         CurrentOrdersAdapter adapter = new CurrentOrdersAdapter(this);
         List<Order> orders = new ArrayList<>();
-        orders.add(new Order(1, "test", "Пицца с креветками", new DateTime(1504951111111L), new DateTime(), 10));
-        orders.add(new Order(1, "test", "Суши терияки и удон", new DateTime(1504959792456L), new DateTime(), 5));
-        orders.add(new Order(1, "test", "Одна с ананасами, две с шпинатом", new DateTime(1504959792187L), new DateTime(), 1));
-        orders.add(new Order(1, "test", "Девять балтика 7", new DateTime(1504959792856L), new DateTime(), 12));
-        orders.add(new Order(1, "test", "Чайник чая", new DateTime(1504959792911L), new DateTime(), 12.5));
-        orders.add(new Order(1, "test", "три сыра по акции", new DateTime(1504959792125L), new DateTime(), 0.5));
-        orders.add(new Order(1, "test", "Шашлык свиной", new DateTime(1504959792586L), new DateTime(), 1.3));
-        orders.add(new Order(1, "test", "Картофель фри с лососем", new DateTime(1504959792112L), new DateTime(), 10));
-        orders.add(new Order(1, "test", "Картофель фри с лососем", new DateTime(1504959792112L), new DateTime(), 10));
-        orders.add(new Order(1, "test", "Картофель фри с лососем", new DateTime(1504959792112L), new DateTime(), 10));
+        orders.add(new Order(1, "Пицца с креветками", "Детали заказа", new DateTime(1504951111111L), new DateTime(), 10));
+        orders.add(new Order(1, "Суши терияки и удон", "Суши терияки и удон Картофель фри с лососем Детали заказа", new DateTime(1504959792456L), new DateTime(), 5));
+        orders.add(new Order(1, "Одна с ананасами, две с шпинатом", "Одна с ананасами, две с шпинатом Детали заказа", new DateTime(1504959792187L), new DateTime(), 1));
+        orders.add(new Order(1, "Девять балтика 7", "Детали заказа", new DateTime(1504959792856L), new DateTime(), 12));
+        orders.add(new Order(1, "Чайник чая", "Детали заказа", new DateTime(1504959792911L), new DateTime(), 12.5));
+        orders.add(new Order(1, "три сыра по акции", "Детали заказа", new DateTime(1504959792125L), new DateTime(), 0.5));
+        orders.add(new Order(1, "Шашлык свиной", "Детали заказа", new DateTime(1504959792586L), new DateTime(), 1.3));
+        orders.add(new Order(1, "Картофель фри с лососем", "Детали заказа", new DateTime(1504959792112L), new DateTime(), 10));
+        orders.add(new Order(1, "Картофель фри со сметаной", "Детали заказа", new DateTime(1504959792112L), new DateTime(), 10));
+        orders.add(new Order(1, "Селедка в собственном соку", "Детали заказа", new DateTime(1504959792112L), new DateTime(), 10));
 
         for(Order order:orders){
             order.setStatus(DELIVERED);
