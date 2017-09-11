@@ -83,6 +83,6 @@ public class DeliveredFragment extends BaseFragment implements OnItemClickListen
     @Override
     public void onCircleSet(String url, ImageView imageView) {
         Log.i(TAG, "onCircleSet: ");
-        Picasso.with(getActivity()).load(url).into(imageView);
+        Picasso.with(getActivity()).load(url).transform(new CircleTransform()).into(imageView);
     }
 }
