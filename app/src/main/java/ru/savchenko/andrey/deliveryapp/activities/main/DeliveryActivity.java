@@ -82,11 +82,14 @@ public class DeliveryActivity extends BaseActivity implements NavigationView.OnN
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
+            case R.id.nav_not_delivered:
+                openFragment(new FragmentCurrentOrders());
+                return closeDrawer(true);
             case R.id.nav_delivered:
                 openFragment(new DeliveredFragment());
                 return closeDrawer(true);
-            case R.id.nav_not_delivered:
-                openFragment(new FragmentCurrentOrders());
+            case R.id.nav_review:
+                openFragment(new ReviewFragment());
                 return closeDrawer(true);
             case R.id.nav_exit:
                 return closeDrawer(true);
