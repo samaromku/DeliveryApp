@@ -22,6 +22,6 @@
 
     <include layout="@layout/content_delivery" />
 
-    <include layout="@layout/fab"/>
+    <!--<include layout="@layout/fab"/>-->
 
 </android.support.design.widget.CoordinatorLayout>

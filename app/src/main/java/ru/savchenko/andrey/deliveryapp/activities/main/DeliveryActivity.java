@@ -3,12 +3,10 @@ package ru.savchenko.andrey.deliveryapp.activities.main;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +15,7 @@ import android.widget.TextView;
 import ru.savchenko.andrey.deliveryapp.R;
 import ru.savchenko.andrey.deliveryapp.base.BaseActivity;
 import ru.savchenko.andrey.deliveryapp.base.BaseFragment;
+import ru.savchenko.andrey.deliveryapp.fragments.ReviewFragment;
 import ru.savchenko.andrey.deliveryapp.fragments.current_orders.FragmentCurrentOrders;
 import ru.savchenko.andrey.deliveryapp.fragments.delivered.DeliveredFragment;
 import ru.savchenko.andrey.deliveryapp.interfaces.OnChangeTitle;
@@ -30,8 +29,8 @@ public class DeliveryActivity extends BaseActivity implements NavigationView.OnN
         setContentView(R.layout.activity_delivery);
         initToolbar(R.string.app_name);
 
-        fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(view -> Log.i(TAG, "onCreate: fab"));
+//        fab = (FloatingActionButton) findViewById(R.id.fab);
+//        fab.setOnClickListener(view -> Log.i(TAG, "onCreate: fab"));
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -41,13 +40,13 @@ public class DeliveryActivity extends BaseActivity implements NavigationView.OnN
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        onNavigationItemSelected(navigationView.getMenu().findItem(R.id.nav_not_delivered));
 
         View header=navigationView.getHeaderView(0);
         TextView tvStatus = header.findViewById(R.id.tvStatus);
         TextView tvName = header.findViewById(R.id.tvName);
         tvStatus.setText("Статус: Лучший клиент");
         tvName.setText("Имя: Я есть Грут");
-        navigationView.setCheckedItem(R.id.nav_not_delivered);
     }
 
     @Override

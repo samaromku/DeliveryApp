@@ -150,8 +150,8 @@ public class CurrentOrdersAdapter extends RecyclerView.Adapter<RecyclerView.View
             tvCurierName.setText("Имя курьера");
             DateTime date = order.getCreated();
             tvDate.setText(date.getDayOfMonth() + "-" +  date.getMonthOfYear() + "-" + date.getYear() + " " + date.getHourOfDay());
-            btnRating.setOnClickListener(view -> Log.i(TAG, "bind: " + getAdapterPosition()));
-            onCircleSet.onCircleSet("http://www.footballfreestyle.ru/wp-content/uploads/2014/11/test.jpg", ivCompanyLogo);
+            btnRating.setOnClickListener(view -> onCircleSet.onClickReview(getAdapterPosition()));
+            onCircleSet.onCircleSet(order.getUrl(), ivCompanyLogo);
         }
 
         @Override

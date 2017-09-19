@@ -28,4 +28,17 @@ public class BaseActivity extends AppCompatActivity {
         if(getSupportActionBar()!=null)
             getSupportActionBar().setTitle(title);
     }
+
+    protected void initBackButton(){
+        if (getSupportActionBar()!=null)
+            getSupportActionBar().setHomeAsUpIndicator(getResources().getDrawable(R.drawable.ic_arrow_back));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
 }

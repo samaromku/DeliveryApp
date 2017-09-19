@@ -1,5 +1,6 @@
 package ru.savchenko.andrey.deliveryapp.fragments.current_orders;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,6 +18,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ru.savchenko.andrey.deliveryapp.R;
+import ru.savchenko.andrey.deliveryapp.activities.map.MapsActivity;
 import ru.savchenko.andrey.deliveryapp.adapters.CurrentOrdersAdapter;
 import ru.savchenko.andrey.deliveryapp.base.BaseFragment;
 import ru.savchenko.andrey.deliveryapp.entities.Order;
@@ -69,6 +71,6 @@ public class FragmentCurrentOrders extends BaseFragment implements OnItemClickLi
 
     @Override
     public void onclick(int position) {
-        Log.i(TAG, "onclick: " + position);
+        startActivity(new Intent(getActivity(), MapsActivity.class));
     }
 }

@@ -15,6 +15,7 @@ public class Order {
     private double way;
     private int status;
     private int rating;
+    private String url;
 
     @Override
     public String toString() {
@@ -27,6 +28,7 @@ public class Order {
                 ", way=" + way +
                 ", status=" + status +
                 ", rating=" + rating +
+                ", url=" + url +
                 '}';
     }
 
@@ -37,6 +39,24 @@ public class Order {
         this.created = created;
         this.deadLine = deadLine;
         this.way = way;
+    }
+
+    public Order(int id, String title, String body, DateTime created, DateTime deadLine, double way, String url) {
+        this.id = id;
+        this.title = title;
+        this.body = body;
+        this.created = created;
+        this.deadLine = deadLine;
+        this.way = way;
+        this.url = url;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public int getStatus() {

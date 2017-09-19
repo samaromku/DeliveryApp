@@ -1,5 +1,6 @@
 package ru.savchenko.andrey.deliveryapp.adapters;
 
+import android.support.annotation.ColorRes;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,11 +20,15 @@ import ru.savchenko.andrey.deliveryapp.interfaces.OnItemClickListener;
  * Created by savchenko on 12.09.17.
  */
 
-public class ReviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class ReviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<Review> reviewList;
     private OnItemClickListener clickListener;
 
-    public void setData(List<Review>reviews){
+    public ReviewAdapter(OnItemClickListener clickListener) {
+        this.clickListener = clickListener;
+    }
+
+    public void setData(List<Review> reviews) {
         this.reviewList = reviews;
     }
 
@@ -35,7 +40,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         Review review = reviewList.get(position);
-        ((ReviewHolder)holder).bind(review);
+        ((ReviewHolder) holder).bind(review);
     }
 
     @Override
@@ -65,13 +70,39 @@ public class ReviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             clickListener.onclick(getAdapterPosition());
         }
 
-        void bind(Review review){
+        void bind(Review review) {
             DateTime date = review.getDateTime();
             tvDate.setText(date.getDayOfMonth() + ":" + date.getMonthOfYear() + ":" + date.getYear());
             tvTitle.setText(review.getTitle());
             tvReviewBody.setText(review.getBody());
             tvUserName.setText(review.getUserName());
-            btnReview.setText("Отл");
+            btnReview.setText(getBtnText(review.getRating()));
+        }
+
+        String getBtnText(int rating) {
+            switch (rating) {
+                case 1:
+                    setBackBtnColor(R.color.colorRed);
+                    return "Ужс";
+                case 2:
+                    setBackBtnColor(R.color.colorLightRed);
+                    return "Плх";
+                case 3:
+                    setBackBtnColor(R.color.colorYellow);
+                    return "Нрм";
+                case 4:
+                    setBackBtnColor(R.color.colorAccent);
+                    return "Хор";
+                case 5:
+                    setBackBtnColor(R.color.colorPrimary);
+                    return "Отл";
+                default:
+                    return "";
+            }
+        }
+
+        private void setBackBtnColor(@ColorRes int color){
+            btnReview.setBackgroundResource(color);
         }
     }
 }

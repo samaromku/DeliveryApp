@@ -8,4 +8,6 @@ import android.widget.ImageView;
 
 public interface OnCircleSet {
     void onCircleSet(String url, ImageView imageView);
+
+    void onClickReview(int position);
 }
