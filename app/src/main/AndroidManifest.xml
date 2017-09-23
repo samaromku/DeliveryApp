@@ -44,6 +44,8 @@
         <activity
             android:name=".activities.map.MapsActivity"
             android:label="@string/title_activity_maps"></activity>
+        <activity android:name="ru.savchenko.andrey.deliveryapp.activities.test.TestActivity" />
+        <activity android:name="ru.savchenko.andrey.deliveryapp.activities.test.VagineActivity" />
     </application>
 
 </manifest>

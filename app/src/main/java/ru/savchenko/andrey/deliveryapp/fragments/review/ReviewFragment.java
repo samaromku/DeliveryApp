@@ -1,4 +1,4 @@
-package ru.savchenko.andrey.deliveryapp.fragments;
+package ru.savchenko.andrey.deliveryapp.fragments.review;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

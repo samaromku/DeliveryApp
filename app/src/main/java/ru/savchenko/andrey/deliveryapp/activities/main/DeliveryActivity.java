@@ -15,7 +15,7 @@ import android.widget.TextView;
 import ru.savchenko.andrey.deliveryapp.R;
 import ru.savchenko.andrey.deliveryapp.base.BaseActivity;
 import ru.savchenko.andrey.deliveryapp.base.BaseFragment;
-import ru.savchenko.andrey.deliveryapp.fragments.ReviewFragment;
+import ru.savchenko.andrey.deliveryapp.fragments.review.ReviewFragment;
 import ru.savchenko.andrey.deliveryapp.fragments.current_orders.FragmentCurrentOrders;
 import ru.savchenko.andrey.deliveryapp.fragments.delivered.DeliveredFragment;
 import ru.savchenko.andrey.deliveryapp.interfaces.OnChangeTitle;

@@ -13,6 +13,11 @@ import org.joda.time.DateTime;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import dagger.Module;
+import dagger.Provides;
 import ru.savchenko.andrey.deliveryapp.R;
 import ru.savchenko.andrey.deliveryapp.entities.Order;
 import ru.savchenko.andrey.deliveryapp.interfaces.OnCircleSet;
@@ -26,7 +31,7 @@ import static ru.savchenko.andrey.deliveryapp.activities.main.DeliveryActivity.T
 /**
  * Created by Andrey on 09.09.2017.
  */
-
+@Module
 public class CurrentOrdersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<Order> ordersList;
     private OnItemClickListener clickListener;
@@ -38,7 +43,12 @@ public class CurrentOrdersAdapter extends RecyclerView.Adapter<RecyclerView.View
         this.onCircleSet = onCircleSet;
     }
 
-    public CurrentOrdersAdapter(OnItemClickListener clickListener){
+    @Provides
+    CurrentOrdersAdapter currentOrdersAdapter(){
+        return this;
+    }
+
+    public void setClickListener(OnItemClickListener clickListener) {
         this.clickListener = clickListener;
     }
 
@@ -86,20 +96,17 @@ public class CurrentOrdersAdapter extends RecyclerView.Adapter<RecyclerView.View
         }else return NOT_DELIVERED_STATUS;
     }
 
-    private class NotDeliveredHolder extends RecyclerView.ViewHolder implements View.OnClickListener, OnSetTime{
-        TextView tvOrderBody;
-        TextView tvTime;
-        Button btnTime;
+    class NotDeliveredHolder extends RecyclerView.ViewHolder implements View.OnClickListener, OnSetTime{
+        @BindView(R.id.tvOrderBody) TextView tvOrderBody;
+        @BindView(R.id.tvTime) TextView tvTime;
+        @BindView(R.id.btnTime) Button btnTime;
         OnSetTime onSetTime;
-        TextView tvWay;
+        @BindView(R.id.tvWay) TextView tvWay;
 
         NotDeliveredHolder(View itemView) {
             super(itemView);
             onSetTime = this;
-            tvOrderBody = itemView.findViewById(R.id.tvOrderBody);
-            tvTime = itemView.findViewById(R.id.tvTime);
-            btnTime = itemView.findViewById(R.id.btnTime);
-            tvWay = itemView.findViewById(R.id.tvWay);
+            ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(this);
         }
 
@@ -122,26 +129,22 @@ public class CurrentOrdersAdapter extends RecyclerView.Adapter<RecyclerView.View
         }
     }
 
-    private class DeliveredHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        TextView tvOrderBody;
-        TextView tvTitle;
-        TextView tvCurierName;
-        TextView tvDate;
-        ImageView ivCompanyLogo;
-        Button btnRating;
-
-
+    class DeliveredHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+        @BindView(R.id.tvOrderBody) TextView tvOrderBody;
+        @BindView(R.id.tvTitle) TextView tvTitle;
+        @BindView(R.id.tvCurierName) TextView tvCurierName;
+        @BindView(R.id.tvDate) TextView tvDate;
+        @BindView(R.id.ivCompanyLogo) ImageView ivCompanyLogo;
 
         DeliveredHolder(View itemView) {
             super(itemView);
-            tvOrderBody = itemView.findViewById(R.id.tvOrderBody);
-            tvTitle = itemView.findViewById(R.id.tvTitle);
-            tvCurierName = itemView.findViewById(R.id.tvCurierName);
-            tvDate = itemView.findViewById(R.id.tvDate);
-            btnRating = itemView.findViewById(R.id.btnRating);
-            ivCompanyLogo = itemView.findViewById(R.id.ivCompanyLogo);
-
+            ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(this);
+        }
+
+        @OnClick(R.id.btnRating)
+        void reviewClick(){
+            onCircleSet.onClickReview(getAdapterPosition());
         }
 
         void bind(Order order){
@@ -150,7 +153,6 @@ public class CurrentOrdersAdapter extends RecyclerView.Adapter<RecyclerView.View
             tvCurierName.setText("Имя курьера");
             DateTime date = order.getCreated();
             tvDate.setText(date.getDayOfMonth() + "-" +  date.getMonthOfYear() + "-" + date.getYear() + " " + date.getHourOfDay());
-            btnRating.setOnClickListener(view -> onCircleSet.onClickReview(getAdapterPosition()));
             onCircleSet.onCircleSet(order.getUrl(), ivCompanyLogo);
         }
 
