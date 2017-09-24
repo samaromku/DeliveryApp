@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -42,7 +43,7 @@ public class DeliveredFragment extends BaseFragment implements OnItemClickListen
     @BindView(R.id.rvCurrentOrders)
     RecyclerView rvCurrentOrders;
     @Inject CurrentOrdersAdapter adapter;
-    @Inject DeliveredPresenterImpl presenter;
+    @InjectPresenter DeliveredPresenterImpl presenter;
 
     @Nullable
     @Override
@@ -56,6 +57,7 @@ public class DeliveredFragment extends BaseFragment implements OnItemClickListen
         ButterKnife.bind(this, view);
         ComponentManager.initDeliveryComponent();
         ComponentManager.getDeliveryComponent().injectDeliveredFragment(this);
+        if(onChangeTitle!=null)
         onChangeTitle.changeTitle(R.string.delivered);
         initRv();
     }
@@ -63,7 +65,7 @@ public class DeliveredFragment extends BaseFragment implements OnItemClickListen
     private void initRv() {
         rvCurrentOrders.setLayoutManager(new LinearLayoutManager(getActivity()));
         adapter.setClickListener(this);
-        presenter.init(this);
+        presenter.init();
         presenter.setDataOrders();
         adapter.setOnCircleSet(this);
     }

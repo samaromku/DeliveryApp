@@ -5,10 +5,11 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.arellomobile.mvp.presenter.InjectPresenter;
 
 import java.util.List;
 
@@ -26,14 +27,12 @@ import ru.savchenko.andrey.deliveryapp.fragments.current_orders.presenter.Curren
 import ru.savchenko.andrey.deliveryapp.fragments.current_orders.view.CurrentView;
 import ru.savchenko.andrey.deliveryapp.interfaces.OnItemClickListener;
 
-import static android.content.ContentValues.TAG;
-
 /**
  * Created by Andrey on 09.09.2017.
  */
 public class FragmentCurrentOrders extends BaseFragment implements OnItemClickListener, CurrentView{
+    @InjectPresenter CurrentPresenterImpl presenter;
     @BindView(R.id.rvCurrentOrders) RecyclerView rvCurrentOrders;
-    @Inject CurrentPresenterImpl presenter;
     @Inject CurrentOrdersAdapter adapter;
 
     @Nullable
@@ -48,23 +47,21 @@ public class FragmentCurrentOrders extends BaseFragment implements OnItemClickLi
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Log.i(TAG, "onViewCreated: ");
         initRv();
+        if(onChangeTitle!=null)
         onChangeTitle.changeTitle(R.string.my_orders);
     }
 
     private void initRv() {
         rvCurrentOrders.setLayoutManager(new LinearLayoutManager(getActivity()));
-        presenter.init(this);
+        presenter.init();
         presenter.getOrderList();
     }
 
     @Override
     public void setDataList(List<Order> orders) {
-//        adapter = new CurrentOrdersAdapter(this);
         adapter.setClickListener(this);
         adapter.setData(orders);
-        Log.i(TAG, "setDataList: " + adapter.getItemCount());
         rvCurrentOrders.setAdapter(adapter);
     }
 

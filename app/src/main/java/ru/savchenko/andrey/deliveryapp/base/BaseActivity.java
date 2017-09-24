@@ -3,8 +3,9 @@ package ru.savchenko.andrey.deliveryapp.base;
 import android.graphics.Color;
 import android.support.annotation.StringRes;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+
+import com.arellomobile.mvp.MvpAppCompatActivity;
 
 import ru.savchenko.andrey.deliveryapp.R;
 
@@ -12,7 +13,7 @@ import ru.savchenko.andrey.deliveryapp.R;
  * Created by Andrey on 09.09.2017.
  */
 
-public class BaseActivity extends AppCompatActivity {
+public class BaseActivity extends MvpAppCompatActivity {
     protected Toolbar toolbar;
     protected FloatingActionButton fab;
 

@@ -1,5 +1,8 @@
 package ru.savchenko.andrey.deliveryapp.fragments.current_orders.presenter;
 
+import com.arellomobile.mvp.InjectViewState;
+import com.arellomobile.mvp.MvpPresenter;
+
 import javax.inject.Inject;
 
 import dagger.Module;
@@ -11,30 +14,26 @@ import ru.savchenko.andrey.deliveryapp.fragments.current_orders.view.CurrentView
 /**
  * Created by Andrey on 23.09.2017.
  */
+@InjectViewState
 @Module
-public class CurrentPresenterImpl implements CurrentPresenter {
-    private CurrentView view;
+public class CurrentPresenterImpl extends MvpPresenter<CurrentView> implements CurrentPresenter {
     @Inject CurrentInteractorImpl interactor;
 
     @Provides
     CurrentPresenterImpl currentPresenter() {
-        ComponentManager.getAppComponent().injectCurrentPresenter(this);
         return this;
     }
 
     @Override
     public void getOrderList() {
         interactor.getOrderList()
-                .subscribe(orders -> view.setDataList(orders));
+                .subscribe(orders -> getViewState().setDataList(orders));
     }
 
     @Override
-    public void init(CurrentView view) {
-        this.view = view;
+    public void init() {
+        ComponentManager.getAppComponent().injectCurrentPresenter(this);
     }
 
-    @Override
-    public void onDestroy() {
-        view = null;
-    }
+
 }
