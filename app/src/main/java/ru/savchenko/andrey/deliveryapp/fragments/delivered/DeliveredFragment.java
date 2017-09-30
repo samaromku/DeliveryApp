@@ -84,8 +84,8 @@ public class DeliveredFragment extends BaseFragment implements OnItemClickListen
     }
 
     @Override
-    public void onclick(int position) {
-        Log.i(TAG, "onclick: " + position);
+    public void onClick(int position) {
+        Log.i(TAG, "onClick: " + position);
     }
 
     @Override

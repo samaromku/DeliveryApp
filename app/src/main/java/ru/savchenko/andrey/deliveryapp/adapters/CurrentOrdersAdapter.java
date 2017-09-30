@@ -112,7 +112,7 @@ public class CurrentOrdersAdapter extends RecyclerView.Adapter<RecyclerView.View
 
         @Override
         public void onClick(View v) {
-            clickListener.onclick(getAdapterPosition());
+            clickListener.onClick(getAdapterPosition());
         }
 
         void bind(Order order){
@@ -158,7 +158,7 @@ public class CurrentOrdersAdapter extends RecyclerView.Adapter<RecyclerView.View
 
         @Override
         public void onClick(View view) {
-            clickListener.onclick(getAdapterPosition());
+            clickListener.onClick(getAdapterPosition());
         }
     }
 }

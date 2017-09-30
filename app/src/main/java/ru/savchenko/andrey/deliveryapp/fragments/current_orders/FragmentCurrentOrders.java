@@ -66,7 +66,7 @@ public class FragmentCurrentOrders extends BaseFragment implements OnItemClickLi
     }
 
     @Override
-    public void onclick(int position) {
+    public void onClick(int position) {
         startActivity(new Intent(getActivity(), MapsActivity.class));
     }
 }

@@ -64,7 +64,7 @@ public class ReviewFragment extends BaseFragment implements OnItemClickListener 
 
 
     @Override
-    public void onclick(int position) {
+    public void onClick(int position) {
     }
 }
 

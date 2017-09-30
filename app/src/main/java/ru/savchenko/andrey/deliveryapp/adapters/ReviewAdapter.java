@@ -67,7 +67,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
         @Override
         public void onClick(View v) {
-            clickListener.onclick(getAdapterPosition());
+            clickListener.onClick(getAdapterPosition());
         }
 
         void bind(Review review) {
