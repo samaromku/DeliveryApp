@@ -1,5 +1,9 @@
 package ru.savchenko.andrey.deliveryapp.base;
 
+import android.support.annotation.StringRes;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+
 import com.arellomobile.mvp.MvpAppCompatFragment;
 
 import ru.savchenko.andrey.deliveryapp.interfaces.OnChangeTitle;
@@ -13,5 +17,12 @@ public class BaseFragment extends MvpAppCompatFragment {
 
     public void setOnChangeTitle(OnChangeTitle onChangeTitle) {
         this.onChangeTitle = onChangeTitle;
+    }
+
+    protected void changeToolbarTitle(@StringRes int title){
+        ActionBar toolbar = ((AppCompatActivity)getActivity()).getSupportActionBar();
+        if(toolbar!=null){
+            toolbar.setTitle(title);
+        }
     }
 }

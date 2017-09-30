@@ -27,7 +27,7 @@ public class DiscountFragment extends BaseFragment implements DiscountView, OnIt
     public static final String TAG = "DiscountFragment";
     @InjectPresenter
     DiscountPresenter mDiscountPresenter;
-    DiscountAdapter adapter = new DiscountAdapter();
+    DiscountAdapter adapter;
     @BindView(R.id.rvDiscounts)RecyclerView rvDiscounts;
 
     public static DiscountFragment newInstance() {
@@ -48,7 +48,10 @@ public class DiscountFragment extends BaseFragment implements DiscountView, OnIt
     @Override
     public void onViewCreated(final View view, final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        changeToolbarTitle(R.string.discount);
         ButterKnife.bind(this, view);
+        adapter = new DiscountAdapter();
+        adapter.setContext(getActivity());
         mDiscountPresenter.getDiscounts();
     }
 
