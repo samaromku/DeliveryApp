@@ -9,6 +9,23 @@ public class Discount {
     private String title;
     private String body;
     private String imageUrl;
+    private String company;
+
+    public Discount(int id,String company, String title, String body, String imageUrl) {
+        this.id = id;
+        this.title = title;
+        this.body = body;
+        this.imageUrl = imageUrl;
+        this.company = company;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
+    }
 
     public int getId() {
         return id;

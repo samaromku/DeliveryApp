@@ -38,6 +38,7 @@ public class DiscountAdapter extends BaseAdapter<Discount> {
 
     class DiscountViewHolder extends BaseViewHolder<Discount>{
         @BindView(R.id.tvTitle)TextView tvTitle;
+        @BindView(R.id.tvCompanyName)TextView tvCompanyName;
         @BindView(R.id.tvBody)TextView tvBody;
         @BindView(R.id.ivDiscontImage)ImageView ivDiscontImage;
 
@@ -46,7 +47,10 @@ public class DiscountAdapter extends BaseAdapter<Discount> {
             super.bind(discount, clickListener);
             tvTitle.setText(discount.getTitle());
             tvBody.setText(discount.getBody());
-            Picasso.with(context).load(discount.getImageUrl()).transform(new CircleTransform()).into(ivDiscontImage);
+            tvCompanyName.setText(discount.getCompany());
+            Picasso.with(context).load(discount.getImageUrl())
+                    .transform(new CircleTransform())
+                    .into(ivDiscontImage);
         }
 
         public DiscountViewHolder(View itemView) {

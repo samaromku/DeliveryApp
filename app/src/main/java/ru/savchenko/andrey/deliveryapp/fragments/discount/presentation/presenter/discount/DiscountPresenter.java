@@ -21,6 +21,8 @@ public class DiscountPresenter extends MvpPresenter<DiscountView> {
 
     public void getDiscounts(){
         interactor.getDiscounts()
-                .subscribe(discounts -> getViewState().setData(discounts));
+                .subscribe(discounts -> getViewState().setData(discounts), throwable -> {
+                            throwable.printStackTrace();
+                        });
     }
 }

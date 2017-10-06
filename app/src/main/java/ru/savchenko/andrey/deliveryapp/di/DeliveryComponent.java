@@ -11,7 +11,7 @@ import ru.savchenko.andrey.deliveryapp.fragments.delivered.presenter.DeliveredPr
  * Created by Andrey on 23.09.2017.
  */
 
-@Component(dependencies = CurrentComponent.class, modules = {
+@Component(dependencies = AppComponent.class, modules = {
         DeliveredPresenterImpl.class,
         DeliveredInteractorImpl.class,
         CurrentOrdersAdapter.class
