@@ -4,6 +4,12 @@ import javax.inject.Singleton;
 
 import dagger.Component;
 import ru.savchenko.andrey.deliveryapp.adapters.CurrentOrdersAdapter;
+import ru.savchenko.andrey.deliveryapp.di.auth.components.AnonimComponent;
+import ru.savchenko.andrey.deliveryapp.di.auth.components.AuthComponent;
+import ru.savchenko.andrey.deliveryapp.di.auth.modules.AnonimModule;
+import ru.savchenko.andrey.deliveryapp.di.auth.modules.AuthModule;
+import ru.savchenko.andrey.deliveryapp.di.discount.DiscountComponent;
+import ru.savchenko.andrey.deliveryapp.di.discount.DiscountModule;
 import ru.savchenko.andrey.deliveryapp.di.reviews.ReviewComponent;
 import ru.savchenko.andrey.deliveryapp.fragments.current_orders.FragmentCurrentOrders;
 import ru.savchenko.andrey.deliveryapp.fragments.current_orders.interactor.CurrentInteractorImpl;
@@ -33,4 +39,10 @@ public interface AppComponent {
     void inject(DiscountPresenter presenter);
 
     ReviewComponent reviewComponent(ReviewModule reviewModule);
+
+    DiscountComponent discountComponent(DiscountModule discountModule);
+
+    AuthComponent authComponent(AuthModule authModule);
+
+    AnonimComponent anonimComponent(AnonimModule anonimModule);
 }

@@ -1,11 +1,13 @@
 package ru.savchenko.andrey.deliveryapp.activities.auth;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -13,19 +15,24 @@ import butterknife.OnClick;
 import ru.savchenko.andrey.deliveryapp.R;
 import ru.savchenko.andrey.deliveryapp.activities.auth.presenter.AuthPresenter;
 import ru.savchenko.andrey.deliveryapp.activities.auth.view.AuthView;
-import ru.savchenko.andrey.deliveryapp.activities.main.DeliveryActivity;
 import ru.savchenko.andrey.deliveryapp.base.BaseActivity;
+import ru.savchenko.andrey.deliveryapp.di.ComponentManager;
 
 /**
  * Created by Andrey on 09.09.2017.
  */
 
 public class AuthActivity extends BaseActivity implements AuthView {
+    public static final String TAG = "AuthActivity";
     @InjectPresenter AuthPresenter presenter;
+    @Inject
+    AuthShowAnimation authShowAnimation;
     @BindView(R.id.login)TextView login;
+    @BindView(R.id.password)TextView password;
     @OnClick(R.id.btn_enter)
     void onClick(){
-        startActivity(new Intent(this, DeliveryActivity.class));
+        presenter.auth(login.getText().toString(), password.getText().toString());
+//        startActivity(new Intent(this, DeliveryActivity.class));
     }
 
     @Override
@@ -37,12 +44,15 @@ public class AuthActivity extends BaseActivity implements AuthView {
     }
 
     @Override
-    public void authSuccess() {
-        login.setText("her");
+    protected void onDestroy() {
+        super.onDestroy();
+        ComponentManager.destroyBaseAuthComponent();
     }
 
     @Override
-    public void authError() {
-
+    public void auth(boolean isAuhValid) {
+        Log.i(TAG, "auth: " + isAuhValid);
+        ComponentManager.getBaseAuthComponent(isAuhValid).inject(this);
+        authShowAnimation.showAnimation();
     }
 }

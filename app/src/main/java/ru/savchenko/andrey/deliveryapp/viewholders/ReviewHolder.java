@@ -1,4 +1,4 @@
-package ru.savchenko.andrey.deliveryapp.adapters;
+package ru.savchenko.andrey.deliveryapp.viewholders;
 
 import android.support.annotation.ColorRes;
 import android.support.v7.widget.RecyclerView;
@@ -38,7 +38,7 @@ public class ReviewHolder extends RecyclerView.ViewHolder implements View.OnClic
         clickListener.onClick(getAdapterPosition());
     }
 
-    void bind(Review review) {
+    public void bind(Review review) {
         DateTime date = review.getDateTime();
         tvDate.setText(date.getDayOfMonth() + ":" + date.getMonthOfYear() + ":" + date.getYear());
         tvTitle.setText(review.getTitle());

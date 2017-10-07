@@ -5,7 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import ru.savchenko.andrey.deliveryapp.R;
-import ru.savchenko.andrey.deliveryapp.adapters.ReviewHolder;
+import ru.savchenko.andrey.deliveryapp.viewholders.ReviewHolder;
 import ru.savchenko.andrey.deliveryapp.interfaces.OnItemClickListener;
 
 /**

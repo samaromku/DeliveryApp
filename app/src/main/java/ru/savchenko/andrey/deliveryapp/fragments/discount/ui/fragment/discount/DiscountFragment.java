@@ -12,11 +12,14 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ru.savchenko.andrey.deliveryapp.R;
 import ru.savchenko.andrey.deliveryapp.adapters.DiscountAdapter;
 import ru.savchenko.andrey.deliveryapp.base.BaseFragment;
+import ru.savchenko.andrey.deliveryapp.di.ComponentManager;
 import ru.savchenko.andrey.deliveryapp.entities.Discount;
 import ru.savchenko.andrey.deliveryapp.fragments.discount.presentation.presenter.discount.DiscountPresenter;
 import ru.savchenko.andrey.deliveryapp.fragments.discount.presentation.view.discount.DiscountView;
@@ -27,21 +30,11 @@ public class DiscountFragment extends BaseFragment implements DiscountView, OnIt
     public static final String TAG = "DiscountFragment";
     @InjectPresenter
     DiscountPresenter mDiscountPresenter;
-    DiscountAdapter adapter;
     @BindView(R.id.rvDiscounts)RecyclerView rvDiscounts;
-
-    public static DiscountFragment newInstance() {
-        DiscountFragment fragment = new DiscountFragment();
-
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-
-        return fragment;
-    }
+    @Inject DiscountAdapter adapter;
 
     @Override
-    public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
-                             final Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_discount, container, false);
     }
 
@@ -49,10 +42,15 @@ public class DiscountFragment extends BaseFragment implements DiscountView, OnIt
     public void onViewCreated(final View view, final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         changeToolbarTitle(R.string.discount);
+        ComponentManager.initDiscountComponent(this).inject(this);
         ButterKnife.bind(this, view);
-        adapter = new DiscountAdapter();
-        adapter.setContext(getActivity());
         mDiscountPresenter.getDiscounts();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ComponentManager.destroyDiscountComponent();
     }
 
     @Override

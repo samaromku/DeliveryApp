@@ -1,12 +1,12 @@
 package ru.savchenko.andrey.deliveryapp.fragments.current_orders.presenter;
 
 import com.arellomobile.mvp.InjectViewState;
-import com.arellomobile.mvp.MvpPresenter;
 
 import javax.inject.Inject;
 
 import dagger.Module;
 import dagger.Provides;
+import ru.savchenko.andrey.deliveryapp.base.BaseMVPPresenter;
 import ru.savchenko.andrey.deliveryapp.di.ComponentManager;
 import ru.savchenko.andrey.deliveryapp.fragments.current_orders.interactor.CurrentInteractorImpl;
 import ru.savchenko.andrey.deliveryapp.fragments.current_orders.view.CurrentView;
@@ -16,7 +16,7 @@ import ru.savchenko.andrey.deliveryapp.fragments.current_orders.view.CurrentView
  */
 @InjectViewState
 @Module
-public class CurrentPresenterImpl extends MvpPresenter<CurrentView> implements CurrentPresenter {
+public class CurrentPresenterImpl extends BaseMVPPresenter<CurrentView> implements CurrentPresenter {
     @Inject CurrentInteractorImpl interactor;
 
     @Provides
