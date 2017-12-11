@@ -18,6 +18,6 @@ public class SuccessAuth implements AuthShowAnimation{
 
     @Override
     public void showAnimation() {
-        context.startActivity(new Intent(context, DeliveryActivity.class));
+        context.startActivity(new Intent(context, DeliveryActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
     }
 }
