@@ -2,9 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <include layout="@layout/toolbar" />
+    android:orientation="vertical"
+    android:padding="8dp">
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
@@ -12,10 +11,10 @@
         android:layout_margin="8dp">
 
         <EditText
-            android:id="@+id/login"
+            android:id="@+id/etName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/login"
+            android:hint="@string/enter_name"
             android:inputType="text" />
     </android.support.design.widget.TextInputLayout>
 
@@ -25,35 +24,16 @@
         android:layout_margin="8dp">
 
         <EditText
-            android:id="@+id/password"
+            android:id="@+id/etPhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/pwd"
-            android:inputType="textPassword" />
+            android:hint="@string/enter_phone"
+            android:inputType="phone"
+            android:maxLength="14"/>
     </android.support.design.widget.TextInputLayout>
 
-    <LinearLayout
+    <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btn_register"
-            style="@style/DeliveryButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            android:layout_weight="1"
-            android:text="@string/registration" />
-
-        <Button
-            android:id="@+id/btn_enter"
-            style="@style/DeliveryButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            android:layout_weight="1"
-            android:text="@string/enter" />
-
-    </LinearLayout>
+        android:text="@string/all_correct"/>
 </LinearLayout>

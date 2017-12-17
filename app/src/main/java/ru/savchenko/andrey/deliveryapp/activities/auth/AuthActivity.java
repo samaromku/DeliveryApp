@@ -1,5 +1,6 @@
 package ru.savchenko.andrey.deliveryapp.activities.auth;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -15,6 +16,7 @@ import butterknife.OnClick;
 import ru.savchenko.andrey.deliveryapp.R;
 import ru.savchenko.andrey.deliveryapp.activities.auth.presenter.AuthPresenter;
 import ru.savchenko.andrey.deliveryapp.activities.auth.view.AuthView;
+import ru.savchenko.andrey.deliveryapp.activities.registry.RegistryActivity;
 import ru.savchenko.andrey.deliveryapp.base.BaseActivity;
 import ru.savchenko.andrey.deliveryapp.di.ComponentManager;
 
@@ -33,6 +35,11 @@ public class AuthActivity extends BaseActivity implements AuthView {
     void onClick(){
         presenter.auth(login.getText().toString(), password.getText().toString());
 //        startActivity(new Intent(this, DeliveryActivity.class));
+    }
+
+    @OnClick(R.id.btn_register)
+    void onRegisterClick(){
+        startActivity(new Intent(this, RegistryActivity.class));
     }
 
     @Override
