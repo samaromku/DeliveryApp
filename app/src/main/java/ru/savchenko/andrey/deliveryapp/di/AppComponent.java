@@ -3,6 +3,7 @@ package ru.savchenko.andrey.deliveryapp.di;
 import javax.inject.Singleton;
 
 import dagger.Component;
+import ru.savchenko.andrey.deliveryapp.activities.registry.RegistryActivity;
 import ru.savchenko.andrey.deliveryapp.adapters.CurrentOrdersAdapter;
 import ru.savchenko.andrey.deliveryapp.di.auth.components.AnonimComponent;
 import ru.savchenko.andrey.deliveryapp.di.auth.components.AuthComponent;
@@ -37,6 +38,7 @@ public interface AppComponent {
     void injectCurrentPresenter(CurrentPresenterImpl currentPresenter);
 
     void inject(DiscountPresenter presenter);
+    void inject(RegistryActivity activity);
 
     ReviewComponent reviewComponent(ReviewModule reviewModule);
 
