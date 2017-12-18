@@ -29,4 +29,9 @@
     <string name="enter_name">Как обращаться*</string>
     <string name="enter_phone">Телефон*</string>
     <string name="all_correct">Все верно</string>
+    <string name="enter_code">Ввести код из смс</string>
+    <string name="get_confirm_code">Получить код подтверждения</string>
+    <string name="try_count">Попыток осталось:</string>
+    <string name="ask_again">Повтор</string>
+    <string name="confirm">Подтвердить</string>
 </resources>

@@ -1,5 +1,6 @@
 package ru.savchenko.andrey.deliveryapp.activities.registry;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,6 +19,7 @@ import butterknife.OnClick;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import ru.savchenko.andrey.deliveryapp.R;
+import ru.savchenko.andrey.deliveryapp.activities.confirm.ConfirmActivity;
 import ru.savchenko.andrey.deliveryapp.base.BaseActivity;
 import ru.savchenko.andrey.deliveryapp.di.ComponentManager;
 import ru.savchenko.andrey.deliveryapp.entities.Data;
@@ -44,7 +46,7 @@ public class RegistryActivity extends BaseActivity {
         service.sendMessage(message)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(s -> Toast.makeText(this, "Ожидайте подтверждения", Toast.LENGTH_SHORT).show(),
+                .subscribe(s -> startActivity(new Intent(this, ConfirmActivity.class)),
                         throwable -> {
                             Toast.makeText(this, "Произошла ошибка", Toast.LENGTH_SHORT).show();
                             throwable.printStackTrace();
