@@ -8,6 +8,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import javax.inject.Inject;
 
@@ -19,6 +20,8 @@ import io.reactivex.schedulers.Schedulers;
 import ru.savchenko.andrey.deliveryapp.R;
 import ru.savchenko.andrey.deliveryapp.base.BaseActivity;
 import ru.savchenko.andrey.deliveryapp.di.ComponentManager;
+import ru.savchenko.andrey.deliveryapp.entities.Data;
+import ru.savchenko.andrey.deliveryapp.entities.Message;
 import ru.savchenko.andrey.deliveryapp.network.FirebaseService;
 
 /**
@@ -31,13 +34,21 @@ public class RegistryActivity extends BaseActivity {
     FirebaseService service;
     @BindView(R.id.etPhone)
     EditText etPhone;
+    @BindView(R.id.etName)
+    EditText etName;
+
     @OnClick(R.id.btnSend)
-    void onSendClick(){
-        String message = "{'data': { 'message': 'This is a Firebase Cloud Messaging Topic Message!'}}";
+    void onSendClick() {
+        Message message = new Message("/topics/pizda", new Data(etPhone.getText().toString(), etName.getText().toString()));
+
         service.sendMessage(message)
-        .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe(s -> Log.i(TAG, "onSendClick: " +s), throwable -> throwable.printStackTrace());
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(s -> Toast.makeText(this, "Ожидайте подтверждения", Toast.LENGTH_SHORT).show(),
+                        throwable -> {
+                            Toast.makeText(this, "Произошла ошибка", Toast.LENGTH_SHORT).show();
+                            throwable.printStackTrace();
+                        });
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -61,18 +72,16 @@ public class RegistryActivity extends BaseActivity {
                 int digits = etPhone.getText().toString().length();
                 Log.d("LENGTH", "" + digits);
                 if (!lastChar[0].equals("-")) {
-                    if(digits == 1){
+                    if (digits == 1) {
                         etPhone.append("(");
                     }
-                    if(digits == 5){
+                    if (digits == 5) {
                         etPhone.append(")");
                     }
 
                     if (digits == 9) {
                         etPhone.append("-");
                     }
-
-
                 }
             }
 

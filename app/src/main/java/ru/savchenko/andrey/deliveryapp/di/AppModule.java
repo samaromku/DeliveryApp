@@ -26,7 +26,7 @@ import ru.savchenko.andrey.deliveryapp.network.FirebaseService;
 @Module
 public class AppModule {
     public static final String BASE_URL = "https://fcm.googleapis.com";
-    public static final String APP_KEY = "AIzaSyBDA7kAs1YyW1cBPmf1gtF9BB3qGbnbQiY";
+    public static final String APP_KEY = "key=AAAAtzJYhJA:APA91bHSGk3gOnOGqakZbaPvNkEc2P6748IrNYnmoCV_ZIS6iBuS-awPvRHsxG0KshG8jTNdD4nrKwvfLwOA2K9uGryI5cvEpjgb3rGe2ZDK3TPKWj3F4dy3W0GsycSjSr9eMUyEMFfY";
 
     private final App app;
 
@@ -59,7 +59,7 @@ public class AppModule {
                         Request request = chain.request()
                                 .newBuilder()
                                 .addHeader("Content-Type", "application/json")
-                                .addHeader("Authorization", "key=" + APP_KEY)
+                                .addHeader("Authorization", APP_KEY)
                                 .build();
                         return chain.proceed(request);
                     }
