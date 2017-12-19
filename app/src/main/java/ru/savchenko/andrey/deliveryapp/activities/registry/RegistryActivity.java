@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import javax.inject.Inject;
 
+import br.com.sapereaude.maskedEditText.MaskedEditText;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -25,6 +26,13 @@ import ru.savchenko.andrey.deliveryapp.di.ComponentManager;
 import ru.savchenko.andrey.deliveryapp.entities.Data;
 import ru.savchenko.andrey.deliveryapp.entities.Message;
 import ru.savchenko.andrey.deliveryapp.network.FirebaseService;
+import ru.tinkoff.decoro.MaskImpl;
+import ru.tinkoff.decoro.slots.PredefinedSlots;
+import ru.tinkoff.decoro.watchers.FormatWatcher;
+import ru.tinkoff.decoro.watchers.MaskFormatWatcher;
+
+import static ru.savchenko.andrey.deliveryapp.storage.Const.NAME;
+import static ru.savchenko.andrey.deliveryapp.storage.Const.PHONE;
 
 /**
  * Created by Andrey on 17.12.2017.
@@ -46,7 +54,10 @@ public class RegistryActivity extends BaseActivity {
         service.sendMessage(message)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(s -> startActivity(new Intent(this, ConfirmActivity.class)),
+                .subscribe(s -> startActivity
+                                (new Intent(this, ConfirmActivity.class)
+                                .putExtra(PHONE, etPhone.getText().toString())
+                                .putExtra(NAME, etName.getText().toString())),
                         throwable -> {
                             Toast.makeText(this, "Произошла ошибка", Toast.LENGTH_SHORT).show();
                             throwable.printStackTrace();
@@ -60,38 +71,10 @@ public class RegistryActivity extends BaseActivity {
         setContentView(R.layout.activity_registry);
         ComponentManager.getAppComponent().inject(this);
         ButterKnife.bind(this);
-        final String[] lastChar = {" "};
-        etPhone.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                int digits = etPhone.getText().toString().length();
-                if (digits > 1)
-                    lastChar[0] = etPhone.getText().toString().substring(digits - 1);
-            }
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                int digits = etPhone.getText().toString().length();
-                Log.d("LENGTH", "" + digits);
-                if (!lastChar[0].equals("-")) {
-                    if (digits == 1) {
-                        etPhone.append("(");
-                    }
-                    if (digits == 5) {
-                        etPhone.append(")");
-                    }
-
-                    if (digits == 9) {
-                        etPhone.append("-");
-                    }
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
+        MaskImpl mask = MaskImpl.createTerminated(PredefinedSlots.RUS_PHONE_NUMBER);
+        mask.setHideHardcodedHead(false); // default value
+        FormatWatcher formatWatcher = new MaskFormatWatcher(mask);
+        formatWatcher.installOn(etPhone);
     }
 }

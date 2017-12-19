@@ -34,7 +34,7 @@
         android:text="@string/confirm" />
 
     <Button
-        android:id="@+id/btnAskAgain"
+        android:id="@+id/btnRetry"
         android:layout_margin="8dp"
         android:layout_width="0dp"
         android:layout_weight="1"

@@ -17,4 +17,6 @@ public interface Const {
     String RATING_4 = "Плохо";
     String RATING_5 = "Ужасно";
     String SEND_REVIEW = "Оставить отзыв";
+    String PHONE = "phone";
+    String NAME = "name";
 }
