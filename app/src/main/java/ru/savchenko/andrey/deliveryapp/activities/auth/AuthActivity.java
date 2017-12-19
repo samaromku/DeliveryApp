@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -19,6 +22,7 @@ import ru.savchenko.andrey.deliveryapp.activities.auth.view.AuthView;
 import ru.savchenko.andrey.deliveryapp.activities.registry.RegistryActivity;
 import ru.savchenko.andrey.deliveryapp.base.BaseActivity;
 import ru.savchenko.andrey.deliveryapp.di.ComponentManager;
+import ru.savchenko.andrey.deliveryapp.dialogs.PreviewDialog;
 
 /**
  * Created by Andrey on 09.09.2017.
@@ -61,5 +65,25 @@ public class AuthActivity extends BaseActivity implements AuthView {
         Log.i(TAG, "auth: " + isAuhValid);
         ComponentManager.getBaseAuthComponent(isAuhValid).inject(this);
         authShowAnimation.showAnimation();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.auth_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.nav_auth:
+                PreviewDialog previewDialog = new PreviewDialog();
+                previewDialog.show(getFragmentManager(), "previewDialog");
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

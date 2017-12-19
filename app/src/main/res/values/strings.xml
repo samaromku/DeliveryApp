@@ -34,4 +34,6 @@
     <string name="try_count">Попыток осталось:</string>
     <string name="ask_again">Повтор</string>
     <string name="confirm">Подтвердить</string>
+    <string name="order_search">Поиск заказа</string>
+    <string name="enter_order_number">Введите номер заказа</string>
 </resources>
