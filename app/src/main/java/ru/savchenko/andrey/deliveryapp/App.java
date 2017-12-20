@@ -6,6 +6,7 @@ import com.akaita.java.rxjava2debug.RxJava2Debug;
 
 import net.danlew.android.joda.JodaTimeAndroid;
 
+import io.realm.Realm;
 import ru.savchenko.andrey.deliveryapp.di.ComponentManager;
 
 /**
@@ -20,6 +21,6 @@ public class App extends Application {
         JodaTimeAndroid.init(this);
         ComponentManager.init(this);
         RxJava2Debug.enableRxJava2AssemblyTracking(new String[]{"ru.savchenko.andrey.deliveryapp", "ru.savchenko.andrey.mylibrary"});
-
+        Realm.init(this);
     }
 }

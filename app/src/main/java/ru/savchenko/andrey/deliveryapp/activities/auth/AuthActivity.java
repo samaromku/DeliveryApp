@@ -16,6 +16,10 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+import io.realm.Realm;
 import ru.savchenko.andrey.deliveryapp.R;
 import ru.savchenko.andrey.deliveryapp.activities.auth.presenter.AuthPresenter;
 import ru.savchenko.andrey.deliveryapp.activities.auth.view.AuthView;
@@ -23,6 +27,7 @@ import ru.savchenko.andrey.deliveryapp.activities.registry.RegistryActivity;
 import ru.savchenko.andrey.deliveryapp.base.BaseActivity;
 import ru.savchenko.andrey.deliveryapp.di.ComponentManager;
 import ru.savchenko.andrey.deliveryapp.dialogs.PreviewDialog;
+import ru.savchenko.andrey.deliveryapp.entities.Company;
 
 /**
  * Created by Andrey on 09.09.2017.
@@ -65,6 +70,37 @@ public class AuthActivity extends BaseActivity implements AuthView {
         Log.i(TAG, "auth: " + isAuhValid);
         ComponentManager.getBaseAuthComponent(isAuhValid).inject(this);
         authShowAnimation.showAnimation();
+    }
+
+    private void test() {
+        Realm realm = Realm.getDefaultInstance();
+        realm.executeTransaction(realm1 -> {
+            for (int i = 0; i < 10; i++) {
+                realm1.insertOrUpdate(new Company(i, "company" + i, "url"));
+            }
+        });
+
+
+        final Realm[] ioRealm = {null};
+        Observable.fromCallable(() -> {
+            Log.i(TAG, "test: " + "fromCallable " + Thread.currentThread().getName());
+            ioRealm[0] = Realm.getDefaultInstance();
+            return ioRealm[0];
+        })
+                .subscribeOn(Schedulers.io())
+                .doFinally(() -> {
+                    ioRealm[0].close();
+                    Log.i(TAG, "test: " + "finnaly " + Thread.currentThread().getName());
+                })
+                .map(realm1 -> {
+                    Log.i(TAG, "test: " + "map " + Thread.currentThread().getName());
+                    return realm1.copyFromRealm(realm1.where(Company.class).findAll());
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(s -> {
+                    Log.i(TAG, "test: " + s);
+                    Log.i(TAG, "test: " + "subscribe " + Thread.currentThread().getName());
+                });
     }
 
     @Override

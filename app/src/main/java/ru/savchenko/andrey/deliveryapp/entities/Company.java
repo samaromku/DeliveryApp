@@ -1,10 +1,14 @@
 package ru.savchenko.andrey.deliveryapp.entities;
 
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+
 /**
  * Created by Andrey on 11.09.2017.
  */
 
-public class Company {
+public class Company extends RealmObject{
+    @PrimaryKey
     private int id;
     private String companyName;
     private String url;
@@ -13,6 +17,9 @@ public class Company {
         this.id = id;
         this.companyName = companyName;
         this.url = url;
+    }
+
+    public Company() {
     }
 
     public int getId() {
