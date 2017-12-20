@@ -15,6 +15,7 @@ import android.widget.TextView;
 import ru.savchenko.andrey.deliveryapp.R;
 import ru.savchenko.andrey.deliveryapp.base.BaseActivity;
 import ru.savchenko.andrey.deliveryapp.base.BaseFragment;
+import ru.savchenko.andrey.deliveryapp.fragments.companies.CompaniesFragment;
 import ru.savchenko.andrey.deliveryapp.fragments.discount.ui.fragment.discount.DiscountFragment;
 import ru.savchenko.andrey.deliveryapp.fragments.review.ReviewFragment;
 import ru.savchenko.andrey.deliveryapp.fragments.current_orders.FragmentCurrentOrders;
@@ -95,6 +96,9 @@ public class DeliveryActivity extends BaseActivity implements NavigationView.OnN
                 return closeDrawer(true);
             case R.id.nav_discount:
                 openFragment(new DiscountFragment());
+                return closeDrawer(true);
+            case R.id.nav_companies:
+                openFragment(new CompaniesFragment());
                 return closeDrawer(true);
             default:
                 return closeDrawer(true);

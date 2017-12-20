@@ -22,6 +22,11 @@
             android:title="@string/discount" />
 
         <item
+            android:id="@+id/nav_companies"
+            android:icon="@drawable/ic_companies"
+            android:title="@string/companies" />
+
+        <item
             android:id="@+id/nav_exit"
             android:icon="@drawable/exit"
             android:title="@string/exit" />
