@@ -4,7 +4,13 @@ import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -12,14 +18,21 @@ import ru.savchenko.andrey.deliveryapp.R;
 import ru.savchenko.andrey.deliveryapp.base.BaseAdapter;
 import ru.savchenko.andrey.deliveryapp.base.BaseViewHolder;
 import ru.savchenko.andrey.deliveryapp.entities.Company;
+import ru.savchenko.andrey.deliveryapp.interfaces.OnCircleSet;
 import ru.savchenko.andrey.deliveryapp.interfaces.OnItemClickListener;
+import ru.savchenko.andrey.deliveryapp.view.CircleTransform;
 
 /**
  * Created by savchenko on 20.12.17.
  */
 
 public class CompaniesAdapter extends BaseAdapter<Company> {
-    int widthScreen;
+    private int widthScreen;
+    private OnCircleSet onCircleSet;
+
+    public void setOnCircleSet(OnCircleSet onCircleSet) {
+        this.onCircleSet = onCircleSet;
+    }
 
     public void setWidthScreen(int widthScreen) {
         this.widthScreen = widthScreen;
@@ -34,6 +47,7 @@ public class CompaniesAdapter extends BaseAdapter<Company> {
     class CompanyViewHolder extends BaseViewHolder<Company>{
         @BindView(R.id.tvCompanyName)TextView tvCompanyName;
         @BindView(R.id.cvCompany)CardView cvCompany;
+        @BindView(R.id.ivCompanyLogo)ImageView ivCompanyLogo;
 
         CompanyViewHolder(View itemView) {
             super(itemView);
@@ -45,6 +59,7 @@ public class CompaniesAdapter extends BaseAdapter<Company> {
             super.bind(company, clickListener);
             tvCompanyName.setText(company.getCompanyName());
             cvCompany.getLayoutParams().width = widthScreen / 5;
+            onCircleSet.onCircleSet(company.getUrl(), ivCompanyLogo);
         }
     }
 }

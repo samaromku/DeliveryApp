@@ -1,7 +1,9 @@
 package ru.savchenko.andrey.deliveryapp.activities.main;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.annotation.StringRes;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -79,6 +81,7 @@ public class DeliveryActivity extends BaseActivity implements NavigationView.OnN
         return super.onOptionsItemSelected(item);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -93,6 +96,7 @@ public class DeliveryActivity extends BaseActivity implements NavigationView.OnN
                 openFragment(new ReviewFragment());
                 return closeDrawer(true);
             case R.id.nav_exit:
+                finishAffinity();
                 return closeDrawer(true);
             case R.id.nav_discount:
                 openFragment(new DiscountFragment());
