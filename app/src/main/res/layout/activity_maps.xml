@@ -33,8 +33,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:padding="8dp"
-            android:textSize="38sp"
-            tools:text="01:35" />
+            android:textSize="38sp" />
 
 
         <TextView
@@ -44,8 +43,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:padding="8dp"
-            android:textSize="38sp"
-            tools:text="8,1 км" />
+            android:textSize="38sp" />
     </LinearLayout>
 
 

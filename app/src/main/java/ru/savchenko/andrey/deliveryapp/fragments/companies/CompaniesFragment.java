@@ -2,6 +2,7 @@ package ru.savchenko.andrey.deliveryapp.fragments.companies;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
@@ -49,7 +50,7 @@ public class CompaniesFragment extends BaseFragment implements OnItemClickListen
         changeToolbarTitle(R.string.companies_partners);
 
         rvCompanies.setLayoutManager(
-                new StaggeredGridLayoutManager(5, StaggeredGridLayoutManager.VERTICAL));
+                new GridLayoutManager(getActivity(), 5));
         adapter = new CompaniesAdapter();
         setAdapterWithScreen();
         rvCompanies.setHasFixedSize(true);

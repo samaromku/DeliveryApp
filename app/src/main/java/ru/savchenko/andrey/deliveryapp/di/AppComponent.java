@@ -4,6 +4,7 @@ import javax.inject.Singleton;
 
 import dagger.Component;
 import ru.savchenko.andrey.deliveryapp.activities.confirm.ConfirmActivity;
+import ru.savchenko.andrey.deliveryapp.activities.map.MapsActivity;
 import ru.savchenko.andrey.deliveryapp.activities.registry.RegistryActivity;
 import ru.savchenko.andrey.deliveryapp.adapters.CurrentOrdersAdapter;
 import ru.savchenko.andrey.deliveryapp.di.auth.components.AnonimComponent;
@@ -39,7 +40,10 @@ public interface AppComponent {
     void injectCurrentPresenter(CurrentPresenterImpl currentPresenter);
 
     void inject(DiscountPresenter presenter);
+    void inject(MapsActivity activity);
+
     void inject(RegistryActivity activity);
+
     void inject(ConfirmActivity activity);
 
     ReviewComponent reviewComponent(ReviewModule reviewModule);

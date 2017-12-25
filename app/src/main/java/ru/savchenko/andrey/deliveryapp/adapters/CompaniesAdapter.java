@@ -7,11 +7,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ru.savchenko.andrey.deliveryapp.R;
@@ -20,7 +15,6 @@ import ru.savchenko.andrey.deliveryapp.base.BaseViewHolder;
 import ru.savchenko.andrey.deliveryapp.entities.Company;
 import ru.savchenko.andrey.deliveryapp.interfaces.OnCircleSet;
 import ru.savchenko.andrey.deliveryapp.interfaces.OnItemClickListener;
-import ru.savchenko.andrey.deliveryapp.view.CircleTransform;
 
 /**
  * Created by savchenko on 20.12.17.
@@ -58,7 +52,9 @@ public class CompaniesAdapter extends BaseAdapter<Company> {
         public void bind(Company company, OnItemClickListener clickListener) {
             super.bind(company, clickListener);
             tvCompanyName.setText(company.getCompanyName());
-            cvCompany.getLayoutParams().width = widthScreen / 5;
+            int width = widthScreen / 5;
+            cvCompany.getLayoutParams().width = width;
+            cvCompany.getLayoutParams().height = width + 64;
             onCircleSet.onCircleSet(company.getUrl(), ivCompanyLogo);
         }
     }

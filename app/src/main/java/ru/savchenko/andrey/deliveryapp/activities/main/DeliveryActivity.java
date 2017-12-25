@@ -27,11 +27,14 @@ import ru.savchenko.andrey.deliveryapp.interfaces.OnChangeTitle;
 public class DeliveryActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, OnChangeTitle {
     public static final String TAG = "DeliveryActivity";
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_delivery);
         initToolbar(R.string.app_name);
+
+
 
 //        fab = (FloatingActionButton) findViewById(R.id.fab);
 //        fab.setOnClickListener(view -> Log.i(TAG, "onCreate: fab"));
