@@ -1,5 +1,6 @@
 package ru.savchenko.andrey.deliveryapp.fragments.companies;
 
+import android.graphics.Point;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
@@ -49,8 +50,13 @@ public class CompaniesFragment extends BaseFragment implements OnItemClickListen
         ButterKnife.bind(this, view);
         changeToolbarTitle(R.string.companies_partners);
 
-        rvCompanies.setLayoutManager(
-                new GridLayoutManager(getActivity(), 5));
+        Display display = getActivity().getWindowManager().getDefaultDisplay();
+        if(display.getWidth()<800){
+            rvCompanies.setLayoutManager(new GridLayoutManager(getActivity(), 3));
+        }else {
+            rvCompanies.setLayoutManager(new GridLayoutManager(getActivity(), 5));
+        }
+
         adapter = new CompaniesAdapter();
         setAdapterWithScreen();
         rvCompanies.setHasFixedSize(true);

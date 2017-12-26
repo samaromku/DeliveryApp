@@ -65,9 +65,9 @@ public class DeliveredFragment extends BaseFragment implements OnItemClickListen
     private void initRv() {
         rvCurrentOrders.setLayoutManager(new LinearLayoutManager(getActivity()));
         adapter.setClickListener(this);
+        adapter.setOnCircleSet(this);
         presenter.init();
         presenter.setDataOrders();
-        adapter.setOnCircleSet(this);
     }
 
     @Override

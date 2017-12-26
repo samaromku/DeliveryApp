@@ -9,10 +9,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 
 import java.util.List;
 
@@ -27,22 +26,24 @@ import ru.savchenko.andrey.deliveryapp.activities.map.MapsActivity;
 import ru.savchenko.andrey.deliveryapp.adapters.CurrentOrdersAdapter;
 import ru.savchenko.andrey.deliveryapp.base.BaseFragment;
 import ru.savchenko.andrey.deliveryapp.di.ComponentManager;
-import ru.savchenko.andrey.deliveryapp.entities.MapParams;
 import ru.savchenko.andrey.deliveryapp.entities.Order;
 import ru.savchenko.andrey.deliveryapp.fragments.current_orders.presenter.CurrentPresenterImpl;
 import ru.savchenko.andrey.deliveryapp.fragments.current_orders.view.CurrentView;
+import ru.savchenko.andrey.deliveryapp.interfaces.OnCircleSet;
 import ru.savchenko.andrey.deliveryapp.interfaces.OnItemClickListener;
-import ru.savchenko.andrey.deliveryapp.network.MapService;
+import ru.savchenko.andrey.deliveryapp.network.TestFlask;
 
 import static ru.savchenko.andrey.deliveryapp.activities.main.DeliveryActivity.TAG;
 
 /**
  * Created by Andrey on 09.09.2017.
  */
-public class FragmentCurrentOrders extends BaseFragment implements OnItemClickListener, CurrentView{
+public class FragmentCurrentOrders extends BaseFragment implements OnItemClickListener, CurrentView, OnCircleSet {
     @InjectPresenter CurrentPresenterImpl presenter;
     @BindView(R.id.rvCurrentOrders) RecyclerView rvCurrentOrders;
     @Inject CurrentOrdersAdapter adapter;
+    @Inject
+    TestFlask testFlask;
 
     @Nullable
     @Override
@@ -59,6 +60,10 @@ public class FragmentCurrentOrders extends BaseFragment implements OnItemClickLi
         initRv();
         if(onChangeTitle!=null)
         onChangeTitle.changeTitle(R.string.my_orders);
+//        testFlask.flaskTestPost()
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(s -> Log.i(TAG, "auth: " +s), Throwable::printStackTrace);
     }
 
     private void initRv() {
@@ -71,11 +76,22 @@ public class FragmentCurrentOrders extends BaseFragment implements OnItemClickLi
     public void setDataList(List<Order> orders) {
         adapter.setClickListener(this);
         adapter.setData(orders);
+        adapter.setOnCircleSet(this);
         rvCurrentOrders.setAdapter(adapter);
     }
 
     @Override
     public void onClick(int position) {
         startActivity(new Intent(getActivity(), MapsActivity.class));
+    }
+
+    @Override
+    public void onCircleSet(String url, ImageView imageView) {
+
+    }
+
+    @Override
+    public void onClickReview(int position) {
+
     }
 }

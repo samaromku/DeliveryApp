@@ -1,6 +1,10 @@
 package ru.savchenko.andrey.deliveryapp.entities;
 
+import com.google.gson.annotations.SerializedName;
+
 import org.joda.time.DateTime;
+
+import java.util.Date;
 
 /**
  * Created by Andrey on 09.09.2017.
@@ -10,12 +14,14 @@ public class Order {
     private int id;
     private String title;
     private String body;
-    private DateTime created;
-    private DateTime deadLine;
+//    private DateTime created;
+//    private DateTime deadLine;
     private double way;
     private int status;
     private int rating;
     private String url;
+    private Date createdDate;
+    private Date deadLineDate;
 
     @Override
     public String toString() {
@@ -23,21 +29,23 @@ public class Order {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", body='" + body + '\'' +
-                ", created=" + created +
-                ", deadLine=" + deadLine +
+//                ", created=" + created +
+//                ", deadLine=" + deadLine +
                 ", way=" + way +
                 ", status=" + status +
                 ", rating=" + rating +
                 ", url=" + url +
+                ", createdDate=" + createdDate +
+                ", deadLineDate=" + deadLineDate +
                 '}';
     }
 
-    public Order(int id, String title, String body, DateTime created, DateTime deadLine, double way) {
+    public Order(int id, String title, String body, double way) {
         this.id = id;
         this.title = title;
         this.body = body;
-        this.created = created;
-        this.deadLine = deadLine;
+//        this.created = created;
+//        this.deadLine = deadLine;
         this.way = way;
     }
 
@@ -45,8 +53,8 @@ public class Order {
         this.id = id;
         this.title = title;
         this.body = body;
-        this.created = created;
-        this.deadLine = deadLine;
+//        this.created = created;
+//        this.deadLine = deadLine;
         this.way = way;
         this.url = url;
     }
@@ -83,21 +91,21 @@ public class Order {
         this.way = way;
     }
 
-    public DateTime getCreated() {
-        return created;
-    }
-
-    public void setCreated(DateTime created) {
-        this.created = created;
-    }
-
-    public DateTime getDeadLine() {
-        return deadLine;
-    }
-
-    public void setDeadLine(DateTime deadLine) {
-        this.deadLine = deadLine;
-    }
+//    public DateTime getCreated() {
+//        return created;
+//    }
+//
+//    public void setCreated(DateTime created) {
+//        this.created = created;
+//    }
+//
+//    public DateTime getDeadLine() {
+//        return deadLine;
+//    }
+//
+//    public void setDeadLine(DateTime deadLine) {
+//        this.deadLine = deadLine;
+//    }
 
     public int getId() {
         return id;
@@ -123,5 +131,19 @@ public class Order {
         this.body = body;
     }
 
+    public Date getCreatedDate() {
+        return createdDate;
+    }
 
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public Date getDeadLineDate() {
+        return deadLineDate;
+    }
+
+    public void setDeadLineDate(Date deadLineDate) {
+        this.deadLineDate = deadLineDate;
+    }
 }

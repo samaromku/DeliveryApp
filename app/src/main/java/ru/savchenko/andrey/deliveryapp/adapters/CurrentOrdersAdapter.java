@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import org.joda.time.DateTime;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -119,7 +121,7 @@ public class CurrentOrdersAdapter extends RecyclerView.Adapter<RecyclerView.View
             Log.i(TAG, "bind: " + order);
             tvOrderBody.setText(order.getBody());
             tvWay.setText("Расстояние: " + order.getWay() + "км");
-            Utils.getDifferenceString(order.getCreated(), order.getDeadLine(), onSetTime);
+            Utils.getDifferenceString(order.getCreatedDate(), order.getDeadLineDate(), onSetTime);
         }
 
         @Override
@@ -151,8 +153,12 @@ public class CurrentOrdersAdapter extends RecyclerView.Adapter<RecyclerView.View
             tvOrderBody.setText(order.getBody());
             tvTitle.setText(order.getTitle());
             tvCurierName.setText("Имя курьера");
-            DateTime date = order.getCreated();
-            tvDate.setText(date.getDayOfMonth() + "-" +  date.getMonthOfYear() + "-" + date.getYear() + " " + date.getHourOfDay());
+            Date date = order.getCreatedDate();
+            if(date!=null) {
+                tvDate.setText(new SimpleDateFormat("MM/dd/yyyy").format(date));
+            }
+//            tvDate.setText(date.getDayOfMonth() + "-" +  date.getMonthOfYear() + "-" + date.getYear() + " " + date.getHourOfDay());
+
             onCircleSet.onCircleSet(order.getUrl(), ivCompanyLogo);
         }
 

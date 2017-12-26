@@ -3,6 +3,7 @@ package ru.savchenko.andrey.deliveryapp.di;
 import javax.inject.Singleton;
 
 import dagger.Component;
+import ru.savchenko.andrey.deliveryapp.activities.auth.interactor.AuthInteractor;
 import ru.savchenko.andrey.deliveryapp.activities.confirm.ConfirmActivity;
 import ru.savchenko.andrey.deliveryapp.activities.map.MapsActivity;
 import ru.savchenko.andrey.deliveryapp.activities.registry.RegistryActivity;
@@ -40,6 +41,11 @@ public interface AppComponent {
     void injectCurrentPresenter(CurrentPresenterImpl currentPresenter);
 
     void inject(DiscountPresenter presenter);
+
+    void inject(CurrentInteractorImpl currentInteractor);
+
+    void inject(AuthInteractor interactor);
+
     void inject(MapsActivity activity);
 
     void inject(RegistryActivity activity);

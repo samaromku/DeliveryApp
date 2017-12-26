@@ -50,14 +50,14 @@ public class ComponentManager {
         return reviewComponent;
     }
 
-    public static AuthComponent initAuthComponent(){
+    private static AuthComponent initAuthComponent(){
         if(authComponent==null) {
             authComponent = appComponent.authComponent(new AuthModule());
         }
         return authComponent;
     }
 
-    public static AnonimComponent initAnonimComponent(){
+    private static AnonimComponent initAnonimComponent(){
         if(anonimComponent==null) {
             anonimComponent = appComponent.anonimComponent(new AnonimModule());
         }
