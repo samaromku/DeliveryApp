@@ -1,4 +1,4 @@
-package ru.savchenko.andrey.deliveryapp.di.discount;
+package ru.savchenko.andrey.deliveryapp.di.current;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -6,9 +6,9 @@ import java.lang.annotation.RetentionPolicy;
 import javax.inject.Scope;
 
 /**
- * Created by Andrey on 07.10.2017.
+ * Created by savchenko on 27.12.17.
  */
 @Scope
 @Retention(RetentionPolicy.RUNTIME)
-@interface DiscountScope {
+public @interface CurrentScope {
 }

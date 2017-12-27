@@ -18,7 +18,7 @@ import ru.savchenko.andrey.deliveryapp.R;
 import ru.savchenko.andrey.deliveryapp.base.BaseActivity;
 import ru.savchenko.andrey.deliveryapp.base.BaseFragment;
 import ru.savchenko.andrey.deliveryapp.fragments.companies.CompaniesFragment;
-import ru.savchenko.andrey.deliveryapp.fragments.discount.ui.fragment.discount.DiscountFragment;
+import ru.savchenko.andrey.deliveryapp.fragments.discount.DiscountFragment;
 import ru.savchenko.andrey.deliveryapp.fragments.review.ReviewFragment;
 import ru.savchenko.andrey.deliveryapp.fragments.current_orders.FragmentCurrentOrders;
 import ru.savchenko.andrey.deliveryapp.fragments.delivered.DeliveredFragment;

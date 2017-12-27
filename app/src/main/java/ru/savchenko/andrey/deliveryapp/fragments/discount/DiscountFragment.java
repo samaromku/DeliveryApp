@@ -1,4 +1,4 @@
-package ru.savchenko.andrey.deliveryapp.fragments.discount.ui.fragment.discount;
+package ru.savchenko.andrey.deliveryapp.fragments.discount;
 
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -7,8 +7,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -21,17 +23,19 @@ import ru.savchenko.andrey.deliveryapp.adapters.DiscountAdapter;
 import ru.savchenko.andrey.deliveryapp.base.BaseFragment;
 import ru.savchenko.andrey.deliveryapp.di.ComponentManager;
 import ru.savchenko.andrey.deliveryapp.entities.Discount;
-import ru.savchenko.andrey.deliveryapp.fragments.discount.presentation.presenter.discount.DiscountPresenter;
-import ru.savchenko.andrey.deliveryapp.fragments.discount.presentation.view.discount.DiscountView;
+import ru.savchenko.andrey.deliveryapp.interfaces.OnCircleSet;
 import ru.savchenko.andrey.deliveryapp.interfaces.OnItemClickListener;
+import ru.savchenko.andrey.deliveryapp.view.CircleTransform;
 
 
-public class DiscountFragment extends BaseFragment implements DiscountView, OnItemClickListener {
+public class DiscountFragment extends BaseFragment implements
+        DiscountView,
+        OnItemClickListener,
+        OnCircleSet{
     public static final String TAG = "DiscountFragment";
-    @InjectPresenter
-    DiscountPresenter mDiscountPresenter;
+    @Inject DiscountPresenter mDiscountPresenter;
     @BindView(R.id.rvDiscounts)RecyclerView rvDiscounts;
-    @Inject DiscountAdapter adapter;
+//    @Inject DiscountAdapter adapter;
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
@@ -55,15 +59,28 @@ public class DiscountFragment extends BaseFragment implements DiscountView, OnIt
 
     @Override
     public void setData(List<Discount> data) {
+        DiscountAdapter adapter = new DiscountAdapter();
         adapter.setClickListener(this);
+        adapter.setOnCircleSet(this);
         adapter.setDataList(data);
         rvDiscounts.setLayoutManager(new LinearLayoutManager(getActivity()));
         rvDiscounts.setAdapter(adapter);
-
     }
 
     @Override
     public void onClick(int position) {
         Log.i(TAG, "onClick: " + position);
+    }
+
+    @Override
+    public void onCircleSet(String url, ImageView imageView) {
+        Picasso.with(getActivity()).load(url)
+                .transform(new CircleTransform())
+                .into(imageView);
+    }
+
+    @Override
+    public void onClickReview(int position) {
+
     }
 }

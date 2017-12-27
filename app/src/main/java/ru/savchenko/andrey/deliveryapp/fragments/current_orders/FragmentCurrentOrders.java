@@ -39,17 +39,16 @@ import static ru.savchenko.andrey.deliveryapp.activities.main.DeliveryActivity.T
  * Created by Andrey on 09.09.2017.
  */
 public class FragmentCurrentOrders extends BaseFragment implements OnItemClickListener, CurrentView, OnCircleSet {
-    @InjectPresenter CurrentPresenterImpl presenter;
+    @Inject CurrentPresenterImpl presenter;
     @BindView(R.id.rvCurrentOrders) RecyclerView rvCurrentOrders;
-    @Inject
-    TestFlask testFlask;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_current_orders, container, false);
         ButterKnife.bind(this, view);
-        ComponentManager.getAppComponent().injectCurrentFragment(this);
+        ComponentManager.getCurrentComponent(this).inject(this);
+//        ComponentManager.getAppComponent().injectCurrentFragment(this);
         return view;
     }
 
@@ -67,7 +66,6 @@ public class FragmentCurrentOrders extends BaseFragment implements OnItemClickLi
 
     private void initRv() {
         rvCurrentOrders.setLayoutManager(new LinearLayoutManager(getActivity()));
-        presenter.init();
         presenter.getOrderList();
     }
 

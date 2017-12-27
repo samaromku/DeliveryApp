@@ -1,4 +1,4 @@
-package ru.savchenko.andrey.deliveryapp.fragments.discount.presentation.view.discount;
+package ru.savchenko.andrey.deliveryapp.fragments.discount;
 
 import com.arellomobile.mvp.MvpView;
 

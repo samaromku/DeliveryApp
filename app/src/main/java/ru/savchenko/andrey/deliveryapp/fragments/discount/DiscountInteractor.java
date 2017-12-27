@@ -11,12 +11,7 @@ import ru.savchenko.andrey.deliveryapp.entities.Discount;
 /**
  * Created by Andrey on 30.09.2017.
  */
-@Module
 public class DiscountInteractor {
-    @Provides
-    DiscountInteractor interactor(){
-        return this;
-    }
 
     public Observable<List<Discount>> getDiscounts(){
         List<Discount>discounts = new ArrayList<>();

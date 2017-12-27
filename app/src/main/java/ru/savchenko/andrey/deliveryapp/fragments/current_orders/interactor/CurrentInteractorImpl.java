@@ -1,40 +1,21 @@
 package ru.savchenko.andrey.deliveryapp.fragments.current_orders.interactor;
 
-import android.util.Log;
-
-import org.joda.time.DateTime;
-
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
-
-import dagger.Module;
-import dagger.Provides;
 import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
-import ru.savchenko.andrey.deliveryapp.di.ComponentManager;
 import ru.savchenko.andrey.deliveryapp.entities.Order;
 import ru.savchenko.andrey.deliveryapp.network.TestFlask;
-
-import static ru.savchenko.andrey.deliveryapp.activities.main.DeliveryActivity.TAG;
 
 /**
  * Created by Andrey on 23.09.2017.
  */
-@Module
-public class CurrentInteractorImpl implements CurrentInteractor{
-    @Inject
-    TestFlask testFlask;
+public class CurrentInteractorImpl {
+    private TestFlask testFlask;
 
-    @Provides
-    CurrentInteractorImpl currentInteractor(){
-        ComponentManager.getAppComponent().inject(this);
-        return this;
+    public CurrentInteractorImpl(TestFlask testFlask) {
+        this.testFlask = testFlask;
     }
 
-    @Override
     public Observable<List<Order>> getOrderList() {
         return testFlask.getCurrent();
 //        List<Order>orders = new ArrayList<>();

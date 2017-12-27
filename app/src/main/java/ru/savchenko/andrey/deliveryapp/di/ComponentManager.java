@@ -1,24 +1,23 @@
 package ru.savchenko.andrey.deliveryapp.di;
 
-import android.util.Log;
-
 import ru.savchenko.andrey.deliveryapp.App;
 import ru.savchenko.andrey.deliveryapp.di.auth.components.AnonimComponent;
 import ru.savchenko.andrey.deliveryapp.di.auth.components.AuthComponent;
 import ru.savchenko.andrey.deliveryapp.di.auth.modules.AnonimModule;
 import ru.savchenko.andrey.deliveryapp.di.auth.modules.AuthModule;
 import ru.savchenko.andrey.deliveryapp.di.auth.base.BaseAuthComponent;
+import ru.savchenko.andrey.deliveryapp.di.current.CurrentComponent;
+import ru.savchenko.andrey.deliveryapp.di.current.CurrentModule;
 import ru.savchenko.andrey.deliveryapp.di.delivered.DeliveredComponent;
 import ru.savchenko.andrey.deliveryapp.di.delivered.DeliveredModule;
 import ru.savchenko.andrey.deliveryapp.di.discount.DiscountComponent;
 import ru.savchenko.andrey.deliveryapp.di.discount.DiscountModule;
 import ru.savchenko.andrey.deliveryapp.di.reviews.ReviewComponent;
 import ru.savchenko.andrey.deliveryapp.di.reviews.ReviewModule;
+import ru.savchenko.andrey.deliveryapp.fragments.current_orders.FragmentCurrentOrders;
 import ru.savchenko.andrey.deliveryapp.fragments.delivered.DeliveredFragment;
-import ru.savchenko.andrey.deliveryapp.fragments.discount.ui.fragment.discount.DiscountFragment;
+import ru.savchenko.andrey.deliveryapp.fragments.discount.DiscountFragment;
 import ru.savchenko.andrey.deliveryapp.fragments.review.ReviewFragment;
-
-import static android.content.ContentValues.TAG;
 
 /**
  * Created by Andrey on 23.09.2017.
@@ -31,6 +30,7 @@ public class ComponentManager {
     private static AuthComponent authComponent;
     private static AnonimComponent anonimComponent;
     private static DeliveredComponent deliveredComponent;
+    private static CurrentComponent currentComponent;
 
     public static BaseAuthComponent getBaseAuthComponent(boolean isAuth){
         if(isAuth){
@@ -106,5 +106,13 @@ public class ComponentManager {
                     .deliveredComponent(new DeliveredModule(deliveredFragment));
         }
         return deliveredComponent;
+    }
+
+    public static CurrentComponent getCurrentComponent(FragmentCurrentOrders fragmentCurrentOrders){
+        if(currentComponent==null){
+            currentComponent = appComponent
+                    .currentComponent(new CurrentModule(fragmentCurrentOrders));
+        }
+        return currentComponent;
     }
 }

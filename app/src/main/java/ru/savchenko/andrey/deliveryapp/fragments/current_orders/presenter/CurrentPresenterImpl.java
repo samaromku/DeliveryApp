@@ -20,28 +20,19 @@ import static ru.savchenko.andrey.deliveryapp.activities.main.DeliveryActivity.T
 /**
  * Created by Andrey on 23.09.2017.
  */
-@InjectViewState
-@Module
-public class CurrentPresenterImpl extends BaseMVPPresenter<CurrentView> implements CurrentPresenter {
-    @Inject CurrentInteractorImpl interactor;
+public class CurrentPresenterImpl  {
+    private CurrentInteractorImpl interactor;
+    private CurrentView view;
 
-    @Provides
-    CurrentPresenterImpl currentPresenter() {
-        return this;
+    public CurrentPresenterImpl(CurrentInteractorImpl interactor, CurrentView view) {
+        this.interactor = interactor;
+        this.view = view;
     }
 
-    @Override
     public void getOrderList() {
         interactor.getOrderList()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(orders -> getViewState().setDataList(orders), Throwable::printStackTrace);
+                .subscribe(orders -> view.setDataList(orders), Throwable::printStackTrace);
     }
-
-    @Override
-    public void init() {
-        ComponentManager.getAppComponent().injectCurrentPresenter(this);
-    }
-
-
 }

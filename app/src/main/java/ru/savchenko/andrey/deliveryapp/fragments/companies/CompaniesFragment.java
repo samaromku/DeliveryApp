@@ -34,8 +34,8 @@ import static ru.savchenko.andrey.deliveryapp.activities.auth.AuthActivity.TAG;
  * Created by savchenko on 20.12.17.
  */
 
-public class CompaniesFragment extends BaseFragment implements OnItemClickListener, OnCircleSet{
-    @BindView(R.id.rvCompanies)RecyclerView rvCompanies;
+public class CompaniesFragment extends BaseFragment implements OnItemClickListener, OnCircleSet {
+    @BindView(R.id.rvCompanies) RecyclerView rvCompanies;
     private CompaniesAdapter adapter;
 
     @Nullable
@@ -51,16 +51,16 @@ public class CompaniesFragment extends BaseFragment implements OnItemClickListen
         changeToolbarTitle(R.string.companies_partners);
 
         Display display = getActivity().getWindowManager().getDefaultDisplay();
-        if(display.getWidth()<800){
+        if (display.getWidth() < 800) {
             rvCompanies.setLayoutManager(new GridLayoutManager(getActivity(), 3));
-        }else {
+        } else {
             rvCompanies.setLayoutManager(new GridLayoutManager(getActivity(), 5));
         }
 
         adapter = new CompaniesAdapter();
         setAdapterWithScreen();
         rvCompanies.setHasFixedSize(true);
-        List<Company>companies = new ArrayList<>();
+        List<Company> companies = new ArrayList<>();
 
         companies.add(new Company(1, "2 берега", "https://spb.zakazaka.ru/db/348/772/org625.jpg"));
         companies.add(new Company(2, "Газелькин", "https://public.superjob.ru/images/clients_logos.ru/603366_f65f9c18cf57ff58170a281ccc865fd2.jpg"));
@@ -90,7 +90,7 @@ public class CompaniesFragment extends BaseFragment implements OnItemClickListen
         Log.i(TAG, "onClick: " + position);
     }
 
-    private void setAdapterWithScreen(){
+    private void setAdapterWithScreen() {
         Display display = getActivity().getWindowManager().getDefaultDisplay();
         int width = display.getWidth();
         adapter.setWidthScreen(width);
