@@ -21,11 +21,14 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import ru.savchenko.andrey.deliveryapp.App;
 import ru.savchenko.andrey.deliveryapp.R;
 import ru.savchenko.andrey.deliveryapp.activities.map.MapsActivity;
 import ru.savchenko.andrey.deliveryapp.adapters.CurrentOrdersAdapter;
 import ru.savchenko.andrey.deliveryapp.base.BaseFragment;
 import ru.savchenko.andrey.deliveryapp.di.ComponentManager;
+import ru.savchenko.andrey.deliveryapp.di.current.CurrentComponent;
+import ru.savchenko.andrey.deliveryapp.di.current.CurrentModule;
 import ru.savchenko.andrey.deliveryapp.entities.Order;
 import ru.savchenko.andrey.deliveryapp.fragments.current_orders.presenter.CurrentPresenterImpl;
 import ru.savchenko.andrey.deliveryapp.fragments.current_orders.view.CurrentView;
@@ -47,8 +50,8 @@ public class FragmentCurrentOrders extends BaseFragment implements OnItemClickLi
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_current_orders, container, false);
         ButterKnife.bind(this, view);
-        ComponentManager.getCurrentComponent(this).inject(this);
-//        ComponentManager.getAppComponent().injectCurrentFragment(this);
+        ((CurrentComponent)App.getComponentManager()
+                .getPresenterComponent(getClass(), new CurrentModule(this))).inject(this);
         return view;
     }
 
@@ -62,6 +65,12 @@ public class FragmentCurrentOrders extends BaseFragment implements OnItemClickLi
 //                .subscribeOn(Schedulers.io())
 //                .observeOn(AndroidSchedulers.mainThread())
 //                .subscribe(s -> Log.i(TAG, "auth: " +s), Throwable::printStackTrace);
+    }
+
+    @Override
+    public void onDestroy() {
+        App.getComponentManager().releaseComponent(getClass());
+        super.onDestroy();
     }
 
     private void initRv() {

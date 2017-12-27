@@ -1,4 +1,4 @@
-package ru.savchenko.andrey.deliveryapp.activities.auth.interactor;
+package ru.savchenko.andrey.deliveryapp.activities.auth;
 
 
 import android.text.TextUtils;
@@ -17,15 +17,15 @@ import ru.savchenko.andrey.deliveryapp.network.TestFlask;
  */
 
 public class AuthInteractor {
-    @Inject TestFlask testFlask;
+    private TestFlask testFlask;
 
-    public AuthInteractor() {
-        ComponentManager.getAppComponent().inject(this);
+    public AuthInteractor(TestFlask testFlask) {
+        this.testFlask = testFlask;
     }
 
     private static final String TAG = "AuthInteractor";
 
-    public Observable<Boolean> checkAuth(String login, String password) {
+    Observable<Boolean> checkAuth(String login, String password) {
         testFlask.auth(login, password)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

@@ -2,6 +2,7 @@ package ru.savchenko.andrey.deliveryapp.di.reviews;
 
 import dagger.Module;
 import dagger.Provides;
+import ru.savchenko.andrey.deliveryapp.di.base.BaseModule;
 import ru.savchenko.andrey.deliveryapp.fragments.review.ReviewFragment;
 import ru.savchenko.andrey.deliveryapp.fragments.review.ReviewInterActor;
 import ru.savchenko.andrey.deliveryapp.fragments.review.ReviewPresenter;
@@ -10,30 +11,12 @@ import ru.savchenko.andrey.deliveryapp.fragments.review.ReviewPresenter;
  * Created by Andrey on 06.10.2017.
  */
 @Module
-public class ReviewModule {
+public class ReviewModule implements BaseModule{
     private final ReviewFragment fragment;
 
     public ReviewModule(ReviewFragment fragment) {
         this.fragment = fragment;
     }
-
-//    @ReviewScope
-//    @Provides
-//    List<Review>provideReviews(){
-//        return fragment.getReviews();
-//    }
-
-//    @ReviewScope
-//    @Provides
-//    ReviewAdapter provideAdapter(ReviewViewHolderFactory factory, List<Review>reviews){
-//        return new ReviewAdapter(reviews, factory);
-//    }
-
-//    @ReviewScope
-//    @Provides
-//    ReviewViewHolderFactory provideFactory(LayoutInflater layoutInflater){
-//        return new ReviewViewHolderFactory(fragment, layoutInflater);
-//    }
 
     @ReviewScope
     @Provides

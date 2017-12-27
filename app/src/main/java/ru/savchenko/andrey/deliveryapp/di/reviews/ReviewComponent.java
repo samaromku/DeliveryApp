@@ -1,6 +1,8 @@
 package ru.savchenko.andrey.deliveryapp.di.reviews;
 
 import dagger.Subcomponent;
+import ru.savchenko.andrey.deliveryapp.di.base.BaseComponent;
+import ru.savchenko.andrey.deliveryapp.di.base.ComponentBuilder;
 import ru.savchenko.andrey.deliveryapp.fragments.review.ReviewFragment;
 
 /**
@@ -8,6 +10,7 @@ import ru.savchenko.andrey.deliveryapp.fragments.review.ReviewFragment;
  */
 @ReviewScope
 @Subcomponent(modules = ReviewModule.class)
-public interface ReviewComponent {
-    void inject(ReviewFragment fragment);
+public interface ReviewComponent extends BaseComponent<ReviewFragment>{
+    @Subcomponent.Builder
+    interface Builder extends ComponentBuilder<ReviewComponent, ReviewModule>{}
 }

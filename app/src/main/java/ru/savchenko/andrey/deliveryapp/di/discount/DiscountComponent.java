@@ -1,6 +1,8 @@
 package ru.savchenko.andrey.deliveryapp.di.discount;
 
 import dagger.Subcomponent;
+import ru.savchenko.andrey.deliveryapp.di.base.BaseComponent;
+import ru.savchenko.andrey.deliveryapp.di.base.ComponentBuilder;
 import ru.savchenko.andrey.deliveryapp.fragments.discount.DiscountFragment;
 
 /**
@@ -8,6 +10,7 @@ import ru.savchenko.andrey.deliveryapp.fragments.discount.DiscountFragment;
  */
 @DiscountScope
 @Subcomponent(modules = DiscountModule.class)
-public interface DiscountComponent {
-    void inject(DiscountFragment fragment);
+public interface DiscountComponent extends BaseComponent<DiscountFragment>{
+    @Subcomponent.Builder
+    interface Builder extends ComponentBuilder<DiscountComponent, DiscountModule>{}
 }

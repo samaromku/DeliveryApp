@@ -9,8 +9,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import com.arellomobile.mvp.presenter.InjectPresenter;
-
 import javax.inject.Inject;
 
 import butterknife.BindView;
@@ -20,18 +18,15 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import io.realm.Realm;
+import ru.savchenko.andrey.deliveryapp.App;
 import ru.savchenko.andrey.deliveryapp.R;
-import ru.savchenko.andrey.deliveryapp.activities.auth.presenter.AuthPresenter;
-import ru.savchenko.andrey.deliveryapp.activities.auth.view.AuthView;
 import ru.savchenko.andrey.deliveryapp.activities.main.DeliveryActivity;
 import ru.savchenko.andrey.deliveryapp.activities.registry.RegistryActivity;
 import ru.savchenko.andrey.deliveryapp.base.BaseActivity;
-import ru.savchenko.andrey.deliveryapp.di.ComponentManager;
+import ru.savchenko.andrey.deliveryapp.di.auth.AuthComponent;
+import ru.savchenko.andrey.deliveryapp.di.auth.AuthModule;
 import ru.savchenko.andrey.deliveryapp.dialogs.PreviewDialog;
 import ru.savchenko.andrey.deliveryapp.entities.Company;
-import ru.savchenko.andrey.deliveryapp.network.TestFlask;
-
-import static ru.savchenko.andrey.deliveryapp.activities.main.DeliveryActivity.TAG;
 
 /**
  * Created by Andrey on 09.09.2017.
@@ -39,9 +34,7 @@ import static ru.savchenko.andrey.deliveryapp.activities.main.DeliveryActivity.T
 
 public class AuthActivity extends BaseActivity implements AuthView {
     public static final String TAG = "AuthActivity";
-    @InjectPresenter AuthPresenter presenter;
-    @Inject
-    AuthShowAnimation authShowAnimation;
+    @Inject AuthPresenter presenter;
     @BindView(R.id.login)TextView login;
     @BindView(R.id.password)TextView password;
     @OnClick(R.id.btn_enter)
@@ -57,16 +50,18 @@ public class AuthActivity extends BaseActivity implements AuthView {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ((AuthComponent)App.getComponentManager()
+                .getPresenterComponent(getClass(), new AuthModule(this))).inject(this);
+
         setContentView(R.layout.activity_auth);
         ButterKnife.bind(this);
         initToolbar(R.string.auth);
-
     }
 
     @Override
     protected void onDestroy() {
+        App.getComponentManager().releaseComponent(getClass());
         super.onDestroy();
-        ComponentManager.destroyBaseAuthComponent();
     }
 
     @Override
@@ -74,8 +69,6 @@ public class AuthActivity extends BaseActivity implements AuthView {
         Log.i(TAG, "auth: " + isAuhValid);
         startActivity(new Intent(this, DeliveryActivity.class));
 
-        ComponentManager.getBaseAuthComponent(isAuhValid).inject(this);
-        authShowAnimation.showAnimation();
     }
 
     private void test() {

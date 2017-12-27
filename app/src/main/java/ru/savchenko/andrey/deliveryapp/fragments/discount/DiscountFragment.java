@@ -18,10 +18,13 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import ru.savchenko.andrey.deliveryapp.App;
 import ru.savchenko.andrey.deliveryapp.R;
 import ru.savchenko.andrey.deliveryapp.adapters.DiscountAdapter;
 import ru.savchenko.andrey.deliveryapp.base.BaseFragment;
 import ru.savchenko.andrey.deliveryapp.di.ComponentManager;
+import ru.savchenko.andrey.deliveryapp.di.discount.DiscountComponent;
+import ru.savchenko.andrey.deliveryapp.di.discount.DiscountModule;
 import ru.savchenko.andrey.deliveryapp.entities.Discount;
 import ru.savchenko.andrey.deliveryapp.interfaces.OnCircleSet;
 import ru.savchenko.andrey.deliveryapp.interfaces.OnItemClickListener;
@@ -35,7 +38,6 @@ public class DiscountFragment extends BaseFragment implements
     public static final String TAG = "DiscountFragment";
     @Inject DiscountPresenter mDiscountPresenter;
     @BindView(R.id.rvDiscounts)RecyclerView rvDiscounts;
-//    @Inject DiscountAdapter adapter;
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
@@ -46,7 +48,8 @@ public class DiscountFragment extends BaseFragment implements
     public void onViewCreated(final View view, final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         changeToolbarTitle(R.string.discount);
-        ComponentManager.initDiscountComponent(this).inject(this);
+        ((DiscountComponent)App.getComponentManager()
+                .getPresenterComponent(getClass(), new DiscountModule(this))).inject(this);
         ButterKnife.bind(this, view);
         mDiscountPresenter.getDiscounts();
     }
@@ -54,7 +57,7 @@ public class DiscountFragment extends BaseFragment implements
     @Override
     public void onDestroy() {
         super.onDestroy();
-        ComponentManager.destroyDiscountComponent();
+        App.getComponentManager().releaseComponent(getClass());
     }
 
     @Override

@@ -2,6 +2,7 @@ package ru.savchenko.andrey.deliveryapp.di.discount;
 
 import dagger.Module;
 import dagger.Provides;
+import ru.savchenko.andrey.deliveryapp.di.base.BaseModule;
 import ru.savchenko.andrey.deliveryapp.fragments.discount.DiscountFragment;
 import ru.savchenko.andrey.deliveryapp.fragments.discount.DiscountInteractor;
 import ru.savchenko.andrey.deliveryapp.fragments.discount.DiscountPresenter;
@@ -10,24 +11,12 @@ import ru.savchenko.andrey.deliveryapp.fragments.discount.DiscountPresenter;
  * Created by Andrey on 07.10.2017.
  */
 @Module
-public class DiscountModule {
+public class DiscountModule implements BaseModule{
     private DiscountFragment fragment;
 
     public DiscountModule(DiscountFragment fragment) {
         this.fragment = fragment;
     }
-
-//    @DiscountScope
-//    @Provides
-//    public DiscountAdapter adapter(DiscountViewHolderFactory factory){
-//        return new DiscountAdapter(factory);
-//    }
-//
-//    @DiscountScope
-//    @Provides
-//    public DiscountViewHolderFactory factory(LayoutInflater inflater, Context context){
-//        return new DiscountViewHolderFactory(fragment, inflater, context);
-//    }
 
     @DiscountScope
     @Provides

@@ -21,10 +21,13 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import ru.savchenko.andrey.deliveryapp.App;
 import ru.savchenko.andrey.deliveryapp.R;
 import ru.savchenko.andrey.deliveryapp.adapters.CurrentOrdersAdapter;
 import ru.savchenko.andrey.deliveryapp.base.BaseFragment;
 import ru.savchenko.andrey.deliveryapp.di.ComponentManager;
+import ru.savchenko.andrey.deliveryapp.di.delivered.DeliveredComponent;
+import ru.savchenko.andrey.deliveryapp.di.delivered.DeliveredModule;
 import ru.savchenko.andrey.deliveryapp.dialogs.ReviewDialog;
 import ru.savchenko.andrey.deliveryapp.entities.Order;
 import ru.savchenko.andrey.deliveryapp.fragments.delivered.presenter.DeliveredPresenter;
@@ -56,7 +59,8 @@ public class DeliveredFragment extends BaseFragment implements OnItemClickListen
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
-        ComponentManager.getDeliveredComponent(this).inject(this);
+        ((DeliveredComponent)App.getComponentManager()
+                .getPresenterComponent(getClass(), new DeliveredModule(this))).inject(this);
         if(onChangeTitle!=null)
         onChangeTitle.changeTitle(R.string.delivered);
         initRv();
@@ -71,6 +75,7 @@ public class DeliveredFragment extends BaseFragment implements OnItemClickListen
     @Override
     public void onDestroy() {
         super.onDestroy();
+        App.getComponentManager().releaseComponent(getClass());
     }
 
     @Override

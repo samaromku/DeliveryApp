@@ -18,10 +18,13 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import ru.savchenko.andrey.deliveryapp.App;
 import ru.savchenko.andrey.deliveryapp.R;
 import ru.savchenko.andrey.deliveryapp.adapters.ReviewAdapter;
 import ru.savchenko.andrey.deliveryapp.base.BaseFragment;
 import ru.savchenko.andrey.deliveryapp.di.ComponentManager;
+import ru.savchenko.andrey.deliveryapp.di.reviews.ReviewComponent;
+import ru.savchenko.andrey.deliveryapp.di.reviews.ReviewModule;
 import ru.savchenko.andrey.deliveryapp.entities.Review;
 import ru.savchenko.andrey.deliveryapp.interfaces.OnItemClickListener;
 
@@ -33,7 +36,6 @@ import static android.content.ContentValues.TAG;
 
 public class ReviewFragment extends BaseFragment implements OnItemClickListener, ReviewView {
     @BindView(R.id.rvReviews) RecyclerView rvReviews;
-//    @Inject ReviewAdapter adapter;
     @Inject ReviewPresenter presenter;
 
     @Nullable
@@ -47,14 +49,15 @@ public class ReviewFragment extends BaseFragment implements OnItemClickListener,
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
         onChangeTitle.changeTitle(R.string.my_review);
-        ComponentManager.initReviewComponent(this).inject(this);
+        ((ReviewComponent)App.getComponentManager()
+                .getPresenterComponent(getClass(), new ReviewModule(this))).inject(this);
         presenter.getReviews();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        ComponentManager.destroyReviewComponent();
+        App.getComponentManager().releaseComponent(getClass());
     }
 
     @Override

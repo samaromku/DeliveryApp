@@ -14,12 +14,19 @@ import ru.savchenko.andrey.deliveryapp.di.ComponentManager;
  */
 
 public class App extends Application {
+    private static ComponentManager componentManager;
+
+    public static ComponentManager getComponentManager() {
+        return componentManager;
+    }
 
     @Override
     public void onCreate() {
         super.onCreate();
         JodaTimeAndroid.init(this);
-        ComponentManager.init(this);
+//        ComponentManager.init(this);
+        componentManager = new ComponentManager();
+        componentManager.init();
         RxJava2Debug.enableRxJava2AssemblyTracking(new String[]{"ru.savchenko.andrey.deliveryapp", "ru.savchenko.andrey.mylibrary"});
         Realm.init(this);
     }

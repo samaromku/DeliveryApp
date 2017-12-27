@@ -1,4 +1,4 @@
-package ru.savchenko.andrey.deliveryapp.activities.auth.view;
+package ru.savchenko.andrey.deliveryapp.activities.auth;
 
 import com.arellomobile.mvp.MvpView;
 

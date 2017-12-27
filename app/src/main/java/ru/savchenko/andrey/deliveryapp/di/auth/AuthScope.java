@@ -1,4 +1,4 @@
-package ru.savchenko.andrey.deliveryapp.di.auth.scopes;
+package ru.savchenko.andrey.deliveryapp.di.auth;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -10,5 +10,5 @@ import javax.inject.Scope;
  */
 @Scope
 @Retention(RetentionPolicy.RUNTIME)
-public @interface AnonimScope {
+@interface AuthScope {
 }

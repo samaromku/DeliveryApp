@@ -1,6 +1,9 @@
 package ru.savchenko.andrey.deliveryapp.di.delivered;
 
 import dagger.Subcomponent;
+import ru.savchenko.andrey.deliveryapp.activities.main.DeliveryActivity;
+import ru.savchenko.andrey.deliveryapp.di.base.BaseComponent;
+import ru.savchenko.andrey.deliveryapp.di.base.ComponentBuilder;
 import ru.savchenko.andrey.deliveryapp.fragments.delivered.DeliveredFragment;
 
 /**
@@ -8,6 +11,7 @@ import ru.savchenko.andrey.deliveryapp.fragments.delivered.DeliveredFragment;
  */
 @DeliveredScope
 @Subcomponent(modules = DeliveredModule.class)
-public interface DeliveredComponent {
-    void inject(DeliveredFragment deliveredFragment);
+public interface DeliveredComponent extends BaseComponent<DeliveredFragment>{
+    @Subcomponent.Builder
+    interface Builder extends ComponentBuilder<DeliveredComponent, DeliveredModule>{}
 }
