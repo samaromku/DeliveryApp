@@ -9,5 +9,5 @@ import ru.savchenko.andrey.deliveryapp.fragments.discount.ui.fragment.discount.D
 @DiscountScope
 @Subcomponent(modules = DiscountModule.class)
 public interface DiscountComponent {
-    public void inject(DiscountFragment fragment);
+    void inject(DiscountFragment fragment);
 }

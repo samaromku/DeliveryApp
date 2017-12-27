@@ -15,13 +15,13 @@ import static ru.savchenko.andrey.deliveryapp.storage.Const.DELIVERED;
 /**
  * Created by Andrey on 23.09.2017.
  */
-@Module
+//@Module
 public class DeliveredInteractorImpl implements DeliveredInteractor {
 
-    @Provides
-    public DeliveredInteractorImpl deliveredInteractor(){
-        return this;
-    }
+//    @Provides
+//    DeliveredInteractorImpl deliveredInteractor(){
+//        return this;
+//    }
 
     @Override
     public Observable<List<Order>> getDeliveredOrders() {

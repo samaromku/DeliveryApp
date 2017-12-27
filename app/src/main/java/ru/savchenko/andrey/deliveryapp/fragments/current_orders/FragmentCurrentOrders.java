@@ -41,7 +41,6 @@ import static ru.savchenko.andrey.deliveryapp.activities.main.DeliveryActivity.T
 public class FragmentCurrentOrders extends BaseFragment implements OnItemClickListener, CurrentView, OnCircleSet {
     @InjectPresenter CurrentPresenterImpl presenter;
     @BindView(R.id.rvCurrentOrders) RecyclerView rvCurrentOrders;
-    @Inject CurrentOrdersAdapter adapter;
     @Inject
     TestFlask testFlask;
 
@@ -74,6 +73,7 @@ public class FragmentCurrentOrders extends BaseFragment implements OnItemClickLi
 
     @Override
     public void setDataList(List<Order> orders) {
+        CurrentOrdersAdapter adapter = new CurrentOrdersAdapter();
         adapter.setClickListener(this);
         adapter.setData(orders);
         adapter.setOnCircleSet(this);

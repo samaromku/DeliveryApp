@@ -12,6 +12,8 @@ import ru.savchenko.andrey.deliveryapp.di.auth.components.AnonimComponent;
 import ru.savchenko.andrey.deliveryapp.di.auth.components.AuthComponent;
 import ru.savchenko.andrey.deliveryapp.di.auth.modules.AnonimModule;
 import ru.savchenko.andrey.deliveryapp.di.auth.modules.AuthModule;
+import ru.savchenko.andrey.deliveryapp.di.delivered.DeliveredComponent;
+import ru.savchenko.andrey.deliveryapp.di.delivered.DeliveredModule;
 import ru.savchenko.andrey.deliveryapp.di.discount.DiscountComponent;
 import ru.savchenko.andrey.deliveryapp.di.discount.DiscountModule;
 import ru.savchenko.andrey.deliveryapp.di.reviews.ReviewComponent;
@@ -30,7 +32,6 @@ import ru.savchenko.andrey.deliveryapp.di.reviews.ReviewModule;
         AppModule.class,
         CurrentPresenterImpl.class,
         CurrentInteractorImpl.class,
-        CurrentOrdersAdapter.class,
         DiscountInteractor.class
 })
 
@@ -59,4 +60,6 @@ public interface AppComponent {
     AuthComponent authComponent(AuthModule authModule);
 
     AnonimComponent anonimComponent(AnonimModule anonimModule);
+
+    DeliveredComponent deliveredComponent(DeliveredModule deliveredModule);
 }

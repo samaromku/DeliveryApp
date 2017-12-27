@@ -16,7 +16,7 @@ public class AuthModule {
 
     @Provides
     @AuthScope
-    public AuthShowAnimation authShowAnimation(Context context){
+    AuthShowAnimation authShowAnimation(Context context){
         return new SuccessAuth(context);
     }
 }

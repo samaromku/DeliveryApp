@@ -1,4 +1,4 @@
-package ru.savchenko.andrey.deliveryapp.di.base;
+package ru.savchenko.andrey.deliveryapp.di.auth.base;
 
 import ru.savchenko.andrey.deliveryapp.activities.auth.AuthActivity;
 
@@ -7,5 +7,5 @@ import ru.savchenko.andrey.deliveryapp.activities.auth.AuthActivity;
  */
 
 public interface BaseAuthComponent {
-    public void inject(AuthActivity authActivity);
+    void inject(AuthActivity authActivity);
 }

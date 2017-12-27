@@ -27,6 +27,7 @@ import ru.savchenko.andrey.deliveryapp.base.BaseFragment;
 import ru.savchenko.andrey.deliveryapp.di.ComponentManager;
 import ru.savchenko.andrey.deliveryapp.dialogs.ReviewDialog;
 import ru.savchenko.andrey.deliveryapp.entities.Order;
+import ru.savchenko.andrey.deliveryapp.fragments.delivered.presenter.DeliveredPresenter;
 import ru.savchenko.andrey.deliveryapp.fragments.delivered.presenter.DeliveredPresenterImpl;
 import ru.savchenko.andrey.deliveryapp.fragments.delivered.view.DeliveredView;
 import ru.savchenko.andrey.deliveryapp.interfaces.OnCircleSet;
@@ -42,8 +43,8 @@ import static android.content.ContentValues.TAG;
 public class DeliveredFragment extends BaseFragment implements OnItemClickListener, OnCircleSet, DeliveredView{
     @BindView(R.id.rvCurrentOrders)
     RecyclerView rvCurrentOrders;
-    @Inject CurrentOrdersAdapter adapter;
-    @InjectPresenter DeliveredPresenterImpl presenter;
+
+    @Inject DeliveredPresenter presenter;
 
     @Nullable
     @Override
@@ -55,8 +56,7 @@ public class DeliveredFragment extends BaseFragment implements OnItemClickListen
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
-        ComponentManager.initDeliveryComponent();
-        ComponentManager.getDeliveryComponent().injectDeliveredFragment(this);
+        ComponentManager.getDeliveredComponent(this).inject(this);
         if(onChangeTitle!=null)
         onChangeTitle.changeTitle(R.string.delivered);
         initRv();
@@ -64,21 +64,20 @@ public class DeliveredFragment extends BaseFragment implements OnItemClickListen
 
     private void initRv() {
         rvCurrentOrders.setLayoutManager(new LinearLayoutManager(getActivity()));
-        adapter.setClickListener(this);
-        adapter.setOnCircleSet(this);
-        presenter.init();
+
         presenter.setDataOrders();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        presenter.onDestroy();
-        ComponentManager.destroyDeliveryComponent();
     }
 
     @Override
     public void setData(List<Order> data) {
+        CurrentOrdersAdapter adapter = new CurrentOrdersAdapter();
+        adapter.setClickListener(this);
+        adapter.setOnCircleSet(this);
         adapter.setData(data);
         rvCurrentOrders.setAdapter(adapter);
     }

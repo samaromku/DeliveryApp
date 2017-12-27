@@ -31,9 +31,10 @@ import static android.content.ContentValues.TAG;
  * Created by savchenko on 12.09.17.
  */
 
-public class ReviewFragment extends BaseFragment implements OnItemClickListener {
+public class ReviewFragment extends BaseFragment implements OnItemClickListener, ReviewView {
     @BindView(R.id.rvReviews) RecyclerView rvReviews;
-    @Inject ReviewAdapter adapter;
+//    @Inject ReviewAdapter adapter;
+    @Inject ReviewPresenter presenter;
 
     @Nullable
     @Override
@@ -47,7 +48,7 @@ public class ReviewFragment extends BaseFragment implements OnItemClickListener 
         ButterKnife.bind(this, view);
         onChangeTitle.changeTitle(R.string.my_review);
         ComponentManager.initReviewComponent(this).inject(this);
-        initRv();
+        presenter.getReviews();
     }
 
     @Override
@@ -56,30 +57,18 @@ public class ReviewFragment extends BaseFragment implements OnItemClickListener 
         ComponentManager.destroyReviewComponent();
     }
 
-    private void initRv() {
-        rvReviews.setLayoutManager(new LinearLayoutManager(getActivity()));
-        rvReviews.setAdapter(adapter);
-    }
-
-    public List<Review>getReviews(){
-        List<Review> reviews = new ArrayList<>();
-        reviews.add(new Review(1, "Заказ доставили очень быстро", "Заказ доставили очень быстро и оперативно, курьер выжливый и прятный", new DateTime(), 5, "Станислав"));
-        reviews.add(new Review(1, "Очень хорошо!", "Заказ доставили очень быстро и оперативно, курьер выжливый и прятный", new DateTime(), 4, "Станислав"));
-        reviews.add(new Review(1, "Долго ехал курьер", "Заказ доставили очень быстро и оперативно, курьер выжливый и прятный", new DateTime(), 3, "Станислав"));
-        reviews.add(new Review(1, "Не положили подарок на День Рождения", "Заказ доставили очень быстро и оперативно, курьер выжливый и прятный", new DateTime(), 2, "Станислав"));
-        reviews.add(new Review(1, "Курьер съел мою пиццу(((", "Заказ доставили очень быстро и оперативно, курьер выжливый и прятный", new DateTime(), 1, "Станислав"));
-        reviews.add(new Review(1, "Заказ доставили очень быстро", "Заказ доставили очень быстро и оперативно, курьер выжливый и прятный", new DateTime(), 5, "Станислав"));
-        reviews.add(new Review(1, "Заказ доставили очень быстро", "Заказ доставили очень быстро и оперативно, курьер выжливый и прятный", new DateTime(), 5, "Станислав"));
-        reviews.add(new Review(1, "Заказ доставили очень быстро", "Заказ доставили очень быстро и оперативно, курьер выжливый и прятный", new DateTime(), 4, "Станислав"));
-        reviews.add(new Review(1, "Заказ доставили очень быстро", "Заказ доставили очень быстро и оперативно, курьер выжливый и прятный", new DateTime(), 4, "Станислав"));
-        reviews.add(new Review(1, "Заказ доставили очень быстро", "Заказ доставили очень быстро и оперативно, курьер выжливый и прятный", new DateTime(), 4, "Станислав"));
-
-        return reviews;
-    }
-
     @Override
     public void onClick(int position) {
         Log.i(TAG, "onClick: " + position);
+    }
+
+    @Override
+    public void setListToAdapter(List<Review> listToAdapter) {
+        ReviewAdapter adapter = new ReviewAdapter();
+        adapter.setClickListener(this);
+        adapter.setDataList(listToAdapter);
+        rvReviews.setLayoutManager(new LinearLayoutManager(getActivity()));
+        rvReviews.setAdapter(adapter);
     }
 }
 

@@ -33,7 +33,6 @@ import static ru.savchenko.andrey.deliveryapp.activities.main.DeliveryActivity.T
 /**
  * Created by Andrey on 09.09.2017.
  */
-@Module
 public class CurrentOrdersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<Order> ordersList;
     private OnItemClickListener clickListener;
@@ -43,11 +42,6 @@ public class CurrentOrdersAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     public void setOnCircleSet(OnCircleSet onCircleSet) {
         this.onCircleSet = onCircleSet;
-    }
-
-    @Provides
-    CurrentOrdersAdapter currentOrdersAdapter(){
-        return this;
     }
 
     public void setClickListener(OnItemClickListener clickListener) {

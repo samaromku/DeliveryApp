@@ -1,4 +1,4 @@
-package ru.savchenko.andrey.deliveryapp.di.scopes;
+package ru.savchenko.andrey.deliveryapp.di.delivered;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -6,9 +6,9 @@ import java.lang.annotation.RetentionPolicy;
 import javax.inject.Scope;
 
 /**
- * Created by Andrey on 23.09.2017.
+ * Created by savchenko on 27.12.17.
  */
 @Scope
 @Retention(RetentionPolicy.RUNTIME)
-public @interface DeliveryScope {
+public @interface DeliveredScope {
 }
