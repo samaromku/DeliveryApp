@@ -23,6 +23,11 @@ import ru.savchenko.andrey.deliveryapp.interfaces.OnItemClickListener;
 public class CompaniesAdapter extends BaseAdapter<Company> {
     private int widthScreen;
     private OnCircleSet onCircleSet;
+    private int columns;
+
+    public void setColumns(int columns) {
+        this.columns = columns;
+    }
 
     public void setOnCircleSet(OnCircleSet onCircleSet) {
         this.onCircleSet = onCircleSet;
@@ -52,7 +57,7 @@ public class CompaniesAdapter extends BaseAdapter<Company> {
         public void bind(Company company, OnItemClickListener clickListener) {
             super.bind(company, clickListener);
             tvCompanyName.setText(company.getCompanyName());
-            int width = widthScreen / 5;
+            int width = widthScreen / columns;
             cvCompany.getLayoutParams().width = width;
             cvCompany.getLayoutParams().height = width + 64;
             onCircleSet.onCircleSet(company.getUrl(), ivCompanyLogo);

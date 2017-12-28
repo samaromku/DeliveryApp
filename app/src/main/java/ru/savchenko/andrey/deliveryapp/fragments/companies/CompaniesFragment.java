@@ -37,6 +37,7 @@ import static ru.savchenko.andrey.deliveryapp.activities.auth.AuthActivity.TAG;
 public class CompaniesFragment extends BaseFragment implements OnItemClickListener, OnCircleSet {
     @BindView(R.id.rvCompanies) RecyclerView rvCompanies;
     private CompaniesAdapter adapter;
+    private int columns;
 
     @Nullable
     @Override
@@ -52,9 +53,11 @@ public class CompaniesFragment extends BaseFragment implements OnItemClickListen
 
         Display display = getActivity().getWindowManager().getDefaultDisplay();
         if (display.getWidth() < 800) {
-            rvCompanies.setLayoutManager(new GridLayoutManager(getActivity(), 3));
+            columns = 3;
+            rvCompanies.setLayoutManager(new GridLayoutManager(getActivity(), columns));
         } else {
-            rvCompanies.setLayoutManager(new GridLayoutManager(getActivity(), 5));
+            columns = 5;
+            rvCompanies.setLayoutManager(new GridLayoutManager(getActivity(), columns));
         }
 
         adapter = new CompaniesAdapter();
@@ -94,6 +97,7 @@ public class CompaniesFragment extends BaseFragment implements OnItemClickListen
         Display display = getActivity().getWindowManager().getDefaultDisplay();
         int width = display.getWidth();
         adapter.setWidthScreen(width);
+        adapter.setColumns(columns);
     }
 
     @Override

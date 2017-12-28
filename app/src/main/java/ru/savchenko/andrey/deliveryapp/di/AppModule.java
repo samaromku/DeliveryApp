@@ -23,7 +23,9 @@ import ru.savchenko.andrey.deliveryapp.di.delivered.DeliveredComponent;
 import ru.savchenko.andrey.deliveryapp.di.discount.DiscountComponent;
 import ru.savchenko.andrey.deliveryapp.di.reviews.ReviewComponent;
 import ru.savchenko.andrey.deliveryapp.fragments.current_orders.FragmentCurrentOrders;
+import ru.savchenko.andrey.deliveryapp.fragments.delivered.DeliveredFragment;
 import ru.savchenko.andrey.deliveryapp.fragments.discount.DiscountFragment;
+import ru.savchenko.andrey.deliveryapp.fragments.review.ReviewFragment;
 import ru.savchenko.andrey.deliveryapp.network.FirebaseService;
 import ru.savchenko.andrey.deliveryapp.network.MapService;
 import ru.savchenko.andrey.deliveryapp.network.TestFlask;
@@ -69,8 +71,15 @@ class AppModule {
 
     @Provides
     @IntoMap
-    @ClassKey(ReviewComponent.class)
+    @ClassKey(ReviewFragment.class)
     ComponentBuilder provideReview(ReviewComponent.Builder builder){
+        return builder;
+    }
+
+    @Provides
+    @IntoMap
+    @ClassKey(DeliveredFragment.class)
+    ComponentBuilder provideDelivered(DeliveredComponent.Builder builder){
         return builder;
     }
 
