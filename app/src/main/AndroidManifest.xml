@@ -14,7 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_postman_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".activities.main.DeliveryActivity">
+        <activity android:name=".activities.main.MainActivity">
             <meta-data
                 android:name="com.google.android.geo.API_KEY"
                 android:value="" />

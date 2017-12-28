@@ -16,11 +16,13 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import ru.savchenko.andrey.deliveryapp.activities.auth.AuthActivity;
+import ru.savchenko.andrey.deliveryapp.activities.main.MainActivity;
 import ru.savchenko.andrey.deliveryapp.di.auth.AuthComponent;
 import ru.savchenko.andrey.deliveryapp.di.base.ComponentBuilder;
 import ru.savchenko.andrey.deliveryapp.di.current.CurrentComponent;
 import ru.savchenko.andrey.deliveryapp.di.delivered.DeliveredComponent;
 import ru.savchenko.andrey.deliveryapp.di.discount.DiscountComponent;
+import ru.savchenko.andrey.deliveryapp.di.main.MainComponent;
 import ru.savchenko.andrey.deliveryapp.di.reviews.ReviewComponent;
 import ru.savchenko.andrey.deliveryapp.fragments.current_orders.FragmentCurrentOrders;
 import ru.savchenko.andrey.deliveryapp.fragments.delivered.DeliveredFragment;
@@ -38,7 +40,8 @@ import ru.savchenko.andrey.deliveryapp.network.TestFlask;
         CurrentComponent.class,
         DeliveredComponent.class,
         DiscountComponent.class,
-        ReviewComponent.class
+        ReviewComponent.class,
+        MainComponent.class,
 })
 class AppModule {
     private static final String BASE_FIREBASE_URL = "https://fcm.googleapis.com";
@@ -80,6 +83,14 @@ class AppModule {
     @IntoMap
     @ClassKey(DeliveredFragment.class)
     ComponentBuilder provideDelivered(DeliveredComponent.Builder builder){
+        return builder;
+    }
+
+
+    @Provides
+    @IntoMap
+    @ClassKey(MainActivity.class)
+    ComponentBuilder provideMain(MainComponent.Builder builder){
         return builder;
     }
 

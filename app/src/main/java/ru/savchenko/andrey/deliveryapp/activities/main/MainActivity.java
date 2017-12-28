@@ -9,14 +9,20 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import javax.inject.Inject;
+
+import ru.savchenko.andrey.deliveryapp.App;
 import ru.savchenko.andrey.deliveryapp.R;
 import ru.savchenko.andrey.deliveryapp.base.BaseActivity;
 import ru.savchenko.andrey.deliveryapp.base.BaseFragment;
+import ru.savchenko.andrey.deliveryapp.di.main.MainComponent;
+import ru.savchenko.andrey.deliveryapp.di.main.MainModule;
 import ru.savchenko.andrey.deliveryapp.fragments.companies.CompaniesFragment;
 import ru.savchenko.andrey.deliveryapp.fragments.discount.DiscountFragment;
 import ru.savchenko.andrey.deliveryapp.fragments.review.ReviewFragment;
@@ -24,14 +30,20 @@ import ru.savchenko.andrey.deliveryapp.fragments.current_orders.FragmentCurrentO
 import ru.savchenko.andrey.deliveryapp.fragments.delivered.DeliveredFragment;
 import ru.savchenko.andrey.deliveryapp.interfaces.OnChangeTitle;
 
-public class DeliveryActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, OnChangeTitle {
-    public static final String TAG = "DeliveryActivity";
+public class MainActivity extends BaseActivity implements
+        NavigationView.OnNavigationItemSelectedListener,
+        OnChangeTitle,
+        MainView {
+    public static final String TAG = "MainActivity";
+    @Inject MainPresenter presenter;
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_delivery);
+        ((MainComponent)App.getComponentManager()
+                .getPresenterComponent(getClass(), new MainModule(this))).inject(this);
         initToolbar(R.string.app_name);
 
 
@@ -128,5 +140,21 @@ public class DeliveryActivity extends BaseActivity implements NavigationView.OnN
     @Override
     public void changeTitle(@StringRes int title) {
         changeToolbarTitle(title);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if(isFinishing()){
+            Log.i(TAG, "onDestroy: really");
+        }else {
+            Log.i(TAG, "onDestroy: not really");
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
     }
 }

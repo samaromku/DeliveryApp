@@ -9,8 +9,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.joda.time.DateTime;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -18,8 +16,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import dagger.Module;
-import dagger.Provides;
 import ru.savchenko.andrey.deliveryapp.R;
 import ru.savchenko.andrey.deliveryapp.entities.Order;
 import ru.savchenko.andrey.deliveryapp.interfaces.OnCircleSet;
@@ -28,7 +24,7 @@ import ru.savchenko.andrey.deliveryapp.interfaces.OnSetTime;
 import ru.savchenko.andrey.deliveryapp.storage.Const;
 import ru.savchenko.andrey.deliveryapp.storage.Utils;
 
-import static ru.savchenko.andrey.deliveryapp.activities.main.DeliveryActivity.TAG;
+import static ru.savchenko.andrey.deliveryapp.activities.main.MainActivity.TAG;
 
 /**
  * Created by Andrey on 09.09.2017.

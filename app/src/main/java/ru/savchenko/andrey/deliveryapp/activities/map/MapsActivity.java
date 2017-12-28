@@ -9,7 +9,6 @@ import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.widget.TextView;
 
-import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -38,7 +37,7 @@ import ru.savchenko.andrey.deliveryapp.entities.map.Duration;
 import ru.savchenko.andrey.deliveryapp.entities.map.Leg;
 import ru.savchenko.andrey.deliveryapp.network.MapService;
 
-import static ru.savchenko.andrey.deliveryapp.activities.main.DeliveryActivity.TAG;
+import static ru.savchenko.andrey.deliveryapp.activities.main.MainActivity.TAG;
 
 public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
 

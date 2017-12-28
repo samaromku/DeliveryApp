@@ -1,7 +1,6 @@
 package ru.savchenko.andrey.deliveryapp.di.delivered;
 
 import dagger.Subcomponent;
-import ru.savchenko.andrey.deliveryapp.activities.main.DeliveryActivity;
 import ru.savchenko.andrey.deliveryapp.di.base.BaseComponent;
 import ru.savchenko.andrey.deliveryapp.di.base.ComponentBuilder;
 import ru.savchenko.andrey.deliveryapp.fragments.delivered.DeliveredFragment;

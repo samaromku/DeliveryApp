@@ -20,7 +20,7 @@ import io.reactivex.schedulers.Schedulers;
 import io.realm.Realm;
 import ru.savchenko.andrey.deliveryapp.App;
 import ru.savchenko.andrey.deliveryapp.R;
-import ru.savchenko.andrey.deliveryapp.activities.main.DeliveryActivity;
+import ru.savchenko.andrey.deliveryapp.activities.main.MainActivity;
 import ru.savchenko.andrey.deliveryapp.activities.registry.RegistryActivity;
 import ru.savchenko.andrey.deliveryapp.base.BaseActivity;
 import ru.savchenko.andrey.deliveryapp.di.auth.AuthComponent;
@@ -67,7 +67,7 @@ public class AuthActivity extends BaseActivity implements AuthView {
     @Override
     public void auth(boolean isAuhValid) {
         Log.i(TAG, "auth: " + isAuhValid);
-        startActivity(new Intent(this, DeliveryActivity.class));
+        startActivity(new Intent(this, MainActivity.class));
 
     }
 
