@@ -16,7 +16,11 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import ru.savchenko.andrey.deliveryapp.activities.auth.AuthActivity;
+import ru.savchenko.andrey.deliveryapp.activities.confirm.ConfirmCodeActivity;
+import ru.savchenko.andrey.deliveryapp.activities.confirm.di.ConfirmCodeComponent;
 import ru.savchenko.andrey.deliveryapp.activities.main.MainActivity;
+import ru.savchenko.andrey.deliveryapp.activities.registry.RegActivity;
+import ru.savchenko.andrey.deliveryapp.activities.registry.di.RegComponent;
 import ru.savchenko.andrey.deliveryapp.di.auth.AuthComponent;
 import ru.savchenko.andrey.deliveryapp.di.base.ComponentBuilder;
 import ru.savchenko.andrey.deliveryapp.di.current.CurrentComponent;
@@ -42,6 +46,8 @@ import ru.savchenko.andrey.deliveryapp.network.TestFlask;
         DiscountComponent.class,
         ReviewComponent.class,
         MainComponent.class,
+        RegComponent.class,
+        ConfirmCodeComponent.class,
 })
 class AppModule {
     private static final String BASE_FIREBASE_URL = "https://fcm.googleapis.com";
@@ -59,8 +65,22 @@ class AppModule {
 
     @Provides
     @IntoMap
+    @ClassKey(ConfirmCodeActivity.class)
+    ComponentBuilder provideConfirmActivity(ConfirmCodeComponent.Builder builder){
+        return builder;
+    }
+
+    @Provides
+    @IntoMap
     @ClassKey(FragmentCurrentOrders.class)
     ComponentBuilder provideCurrent(CurrentComponent.Builder builder){
+        return builder;
+    }
+
+    @Provides
+    @IntoMap
+    @ClassKey(RegActivity.class)
+    ComponentBuilder provideRegister(RegComponent.Builder builder){
         return builder;
     }
 

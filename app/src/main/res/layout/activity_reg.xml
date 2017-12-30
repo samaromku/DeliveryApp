@@ -21,16 +21,16 @@
     </android.support.design.widget.TextInputLayout>
 
     <!--<br.com.sapereaude.maskedEditText.MaskedEditText-->
-        <!--android:id="@+id/etPhone"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:inputType="phone"-->
-        <!--android:typeface="monospace"-->
-        <!--mask:allowed_chars="1234567890"-->
-        <!--mask:mask="+7(###)###-##-##"-->
-        <!--android:hint="1234567890"-->
-        <!--app:keep_hint="true"-->
-        <!--/>-->
+    <!--android:id="@+id/etPhone"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:inputType="phone"-->
+    <!--android:typeface="monospace"-->
+    <!--mask:allowed_chars="1234567890"-->
+    <!--mask:mask="+7(###)###-##-##"-->
+    <!--android:hint="1234567890"-->
+    <!--app:keep_hint="true"-->
+    <!--/>-->
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"

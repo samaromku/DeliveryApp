@@ -21,7 +21,7 @@ import io.realm.Realm;
 import ru.savchenko.andrey.deliveryapp.App;
 import ru.savchenko.andrey.deliveryapp.R;
 import ru.savchenko.andrey.deliveryapp.activities.main.MainActivity;
-import ru.savchenko.andrey.deliveryapp.activities.registry.RegistryActivity;
+import ru.savchenko.andrey.deliveryapp.activities.registry.RegActivity;
 import ru.savchenko.andrey.deliveryapp.base.BaseActivity;
 import ru.savchenko.andrey.deliveryapp.di.auth.AuthComponent;
 import ru.savchenko.andrey.deliveryapp.di.auth.AuthModule;
@@ -44,7 +44,7 @@ public class AuthActivity extends BaseActivity implements AuthView {
 
     @OnClick(R.id.btn_register)
     void onRegisterClick(){
-        startActivity(new Intent(this, RegistryActivity.class));
+        startActivity(new Intent(this, RegActivity.class));
     }
 
     @Override

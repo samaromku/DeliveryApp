@@ -19,4 +19,6 @@ public interface Const {
     String SEND_REVIEW = "Оставить отзыв";
     String PHONE = "phone";
     String NAME = "name";
+    String ASK_AGAIN = "Повтор";
+    String TRY_COUNT = "Попыток осталось:";
 }
